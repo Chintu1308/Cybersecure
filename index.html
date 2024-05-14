@@ -1,0 +1,2733 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberSecure Universe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/astro/0.23.1/astro.min.css">
+    <link rel="icon" href="favicon.ico" type="x-icon">
+    <style>
+        /* Basic Resets */
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+    
+        body {
+          font-family: Arial, sans-serif;
+          line-height: 1.6;
+          color: #333;
+          background-color: #f4f4f4;
+        }
+    
+        .container {
+          width: 80%;
+          margin: auto;
+          overflow: hidden;
+        }
+    
+        /* Header Styles */
+        header {
+          background: #50b3a2;
+          padding: 10px;
+          color: white;
+          text-align: center;
+          animation: fadeIn 2s ease-in;
+        }
+    
+        header h1 {
+          font-size: 2.5em;
+        }
+    
+        /* Navigation Styles */
+        nav {
+          background: #333;
+          color: #fff;
+          padding: 15px 0;
+          text-align: center;
+          margin-bottom: 20px;
+        }
+    
+        nav ul {
+          list-style: none;
+        }
+    
+        nav ul li {
+          display: inline;
+          margin: 0 10px;
+        }
+    
+        nav ul li a {
+          color: #fff;
+          text-decoration: none;
+        }
+    
+        /* Main Content Styles */
+        .main {
+          background: #fff;
+          padding: 20px;
+          margin-bottom: 20px;
+        }
+
+        
+    
+        /* Footer Styles */
+        footer {
+          background: #333;
+          color: #fff;
+          text-align: center;
+          padding: 10px;
+          margin-top: 20px;
+        }
+    
+        /* Animations */
+        @keyframes fadeIn {
+          0% {
+            opacity: 0;
+          }
+    
+          100% {
+            opacity: 1;
+          }
+        }
+    
+        /* Add transitions for hover effects */
+        a {
+          transition: color 0.2s;
+        }
+    
+        a:hover {
+          color: #50b3a2;
+        }
+    
+        button {
+          transition: background-color 0.2s, color 0.2s;
+        }
+    
+        button:hover {
+          background-color: #50b3a2;
+          color: #fff;
+        }
+    
+        pre {
+          white-space: pre-wrap;
+          font-family: monospace;
+          background-color: #f4f4f4;
+          padding: 10px;
+          border-radius: 5px;
+        }
+    
+        .border,
+        pre,
+        code.highlighter-rouge {
+          border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
+        }
+    
+        /* Box styles for activities */
+        .activity-box {
+          border: 2px solid #05c1fa;
+          background-color: #f0f0f0;
+          padding: 20px;
+          margin-bottom: 20px;
+          border-radius: 10px;
+        }
+    
+        .activity-box h2 {
+          color: #50b3a2;
+          margin-bottom: 10px;
+        }
+    
+        .activity-box ol {
+          list-style-type: decimal;
+          padding-left: 20px;
+        }
+    
+        .activity-box ol li {
+          margin-bottom: 10px;
+        }
+    
+        .activity-box ol code {
+          background-color: #e8e8e8;
+          padding: 2px 5px;
+          border-radius: 3px;
+        }
+
+        #myVideo {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Additional styles for overlay */
+        .overlay {
+            background: rgba(255, 255, 255, 0.8);
+            color: #000;
+            text-align: center;
+            padding: 50px;
+            transition: background 0.5s ease;
+        }
+
+          .astro-main {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+          }
+
+          .astro-main section {
+              border: 2px solid #50b3a2;
+              background-color: #f0f0f0;
+              padding: 20px;
+              margin-bottom: 20px;
+              border-radius: 10px;
+
+          }
+
+
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        html {
+            scrollbar-width: none; /* For Firefox */
+            -ms-overflow-style: none; /* For Internet Explorer and Edge */
+            scroll-behavior: smooth;
+        }
+
+
+        /* Media query for screens larger than 1024px */
+        @media screen and (min-width: 1024px) {
+            .section-content {
+                display: flex; /* Use flexbox */
+                justify-content: space-between; /* Distribute sections horizontally */
+            }
+        }
+
+        .info {
+            cursor: pointer;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            transition: opacity 0.5s ease;
+        }
+        .modal-content {
+            background-color: #e8e8e8;
+            border-radius: 10px; /* This will give the modal curved edges */
+  
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #00fff2;
+            width: 80%;
+            transition: transform 0.5s ease;
+        }
+
+
+        .modal:target {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal:target .modal-content {
+            transform: scale(1);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        span {
+          cursor: pointer;
+          transition: background 0.3s ease;
+        }
+        
+        span:hover {
+          color: blue;
+          background: linear-gradient(120deg, transparent, rgb(0, 247, 255), transparent);
+        }
+       
+
+        
+
+    </style>
+
+
+
+</head>
+
+<body class="astro">
+    <header class="astro-header bg-dark text-white">
+        <video autoplay muted loop id="myVideo">
+            <source src="video.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+    </header>
+
+
+    <nav class="astro-nav bg-secondary">
+      <ul class="list-unstyled d-flex justify-content-center">
+        <li><a href="#top-colleges" class="info" data-modal="top-colleges">Top Colleges</a></li>
+        <li><a href="#top-companies" class="info" data-modal="top-companies">Top Companies</a></li>
+        <li><a href="#top-personalities" class="info" data-modal="top-personalities">Top Personalities</a></li>
+        <li><a href="#job-roles" class="info" data-modal="job-roles">Job Roles</a></li>
+        <li><a href="#beginners-roadmap-resources" class="info" data-modal="beginners-roadmap-resources">Beginner's Roadmap & Resources</a></li>
+        <li><a href="#skills" class="info" data-modal="skills">Skills</a></li>
+        <li><a href="#certifications" class="info" data-modal="certifications">Certifications</a></li>
+        <li><a href="#beginners-resources" class="info" data-modal="beginners-resources">Beginner's Resources</a></li>
+        <li><a href="#attacher-types" class="info" data-modal="attacher-types">Different types of attacks</a></li>
+        <li><a href="#attack-types" class="info" data-modal="attack-types">Attack Types</a></li>
+        <li><a href="#security-tips" class="info" data-modal="security-tips">Security Tips</a></li>
+      </ul>
+    </nav>
+
+    <main class="astro-main">
+        <section id="top-colleges" class="astro-section bg-light">
+          <h2>Top Colleges for Cyber Security in India</h2>
+          <p>Embark on a cosmic journey of learning and exploration in the realm of cybersecurity. Discover the celestial institutions offering stellar programs:</p>
+          <ul>
+            <li>
+              <span class="info" data-modal="IITD">Indian Institute of Technology Delhi (IIT Delhi)</span> - A star among stars, renowned for its groundbreaking research and visionary education.
+              <div id="IITD" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><h2>Indian Institute of Technology Delhi (IIT Delhi) M.Tech. in Cyber Security Program</h2>
+        <p>The Indian Institute of Technology Delhi (IIT Delhi) offers a full-time, two-year M.Tech. in Cyber Security program. The program is designed to provide students with the knowledge and skills necessary to protect computer systems and networks from cyber attacks.</p>
+        <p>To be eligible for admission to the program, applicants must have a bachelor's degree in computer science, engineering, or a related field with a minimum GPA of 60%. Applicants must also have a valid GATE score.</p>
+        <p>The program is divided into four semesters, with each semester consisting of 16 weeks of classes. The first semester covers the fundamentals of cyber security, including cryptography, network security, and system security. The second semester covers more advanced topics, such as intrusion detection and prevention, malware analysis, and security testing. The third semester is devoted to a research project, and the fourth semester is an internship.</p>
+        <p>The total tuition fee for the program is INR 300,000. In addition to the tuition fee, there is a one-time admission fee of INR 16,150 and a hostel fee of INR 229,320.</p>
+        <p>Graduates of the program have gone on to work in a variety of fields, including information security, computer security, and network security. They have also found employment in government agencies, financial institutions, and consulting firms.</p>
+        <h3>Opportunities for Graduates:</h3>
+        <ul>
+            <li>Information security analyst</li>
+            <li>Computer security analyst</li>
+            <li>Network security analyst</li>
+            <li>Security consultant</li>
+            <li>Security engineer</li>
+            <li>Security architect</li>
+            <li>Security researcher</li>
+            <li>Security manager</li>
+        </ul>
+        <p>The program is accredited by the National Board of Accreditation (NBA).</p>
+    </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="IITK">Indian Institute of Technology Kanpur (IIT Kanpur)</span> - Unravel the mysteries of cybersecurity at this cosmic hub of knowledge and innovation.
+              <div id="IITK" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><h2>Indian Institute of Technology Kanpur (IIT Kanpur) - M.Tech. in Cyber Security</h2>
+                    <p>The Indian Institute of Technology Kanpur (IIT Kanpur) is renowned for its excellence in education and research. Established in 1959, it offers a diverse range of courses, including a prestigious cyber security program.</p>
+                    <p>The M.Tech. in Cyber Security at IIT Kanpur is a two-year, full-time program designed to equip students with the skills and knowledge required to tackle cyber threats. The program's curriculum covers various aspects of cyber security, including network security, cryptography, and malware analysis.</p>
+                    <p>Admission to the program is competitive. Applicants must have a bachelor's degree in engineering or a related field with a minimum GPA of 55%. Additionally, they need to submit a statement of purpose, letters of recommendation, and GRE scores. Shortlisted candidates will undergo an interview conducted by the faculty.</p>
+                    <p>The program fee is INR 20,000 per year, with an additional one-time admission fee of INR 19,950 and a hostel fee of INR 61,440.</p>
+                    <p>Graduates of the program have excellent prospects in various industries, including government, finance, and healthcare. They can also pursue careers as consultants or entrepreneurs.</p>
+                    <p>Key features of the program include faculty-led interactive online sessions, hands-on learning with virtual labs, capstone projects, mentor support, and opportunities to participate in hackathons.</p>
+                    <p>If you aspire to excel in the field of cyber security, IIT Kanpur's M.Tech. program is an ideal choice.</p>
+                </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="NITW">National Institute of Technology Warangal (NIT Warangal)</span> - Embark on an intergalactic journey of discovery and excellence at this cosmic academy.
+              <div id="NITW" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><h2>National Institute of Technology Warangal (NIT Warangal) - M.Tech. in Computer Science and Information Security</h2>
+                    <p>The National Institute of Technology Warangal (NIT Warangal) offers a prestigious Master of Technology (M.Tech.) program in Computer Science and Information Security. This program is meticulously designed to equip students with the essential knowledge and skills required for a successful career in cybersecurity.</p>
+                    <p>Admission to the M.Tech. program is based on the Graduate Aptitude Test in Engineering (GATE) score. The course structure comprises a blend of core and elective courses. Core courses delve into critical topics such as cryptography, network security, and system security, while elective courses enable students to specialize in specific areas of cybersecurity.</p>
+                    <p>The total fee for the M.Tech. program is Rs. 304,000, inclusive of a one-time admission fee of INR 24,500 and a hostel fee of INR 72,200. The program offers admission to a limited number of 25 students.</p>
+                    <p>NIT Warangal's M.Tech. program in Computer Science and Information Security enjoys a stellar reputation and has produced numerous successful graduates. The program boasts a well-structured curriculum and experienced faculty. Additionally, it benefits from a robust alumni network that provides invaluable support and guidance to students.</p>
+                    <p>Upon graduation, students have a plethora of opportunities available to them, including employment in industries such as IT, finance, healthcare, and government. Graduates may assume roles such as cybersecurity analyst, security engineer, or information security manager. Furthermore, they can pursue research opportunities in academia or industry and even venture into entrepreneurship by starting their own cybersecurity companies.</p>
+                    <p>Overall, the M.Tech. program in Computer Science and Information Security at NIT Warangal is an excellent choice for individuals aspiring to build a career in cybersecurity.</p>
+                </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="IIITMK">Indian Institute of Information Technology and Management Kerala (IIITM-K)</span> - Expand your horizons and reach for the stars with cutting-edge programs at this cosmic institution.
+              <div id="IIITMK" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><h2>Indian Institute of Information Technology and Management Kerala (IIITM-K)</h2>
+                    <p>The Indian Institute of Information Technology and Management Kerala (IIITM-K) is an autonomous educational institution located in the Technopark Campus in Thiruvananthapuram, Kerala, India. It was established in 2000 by the Kerala government and was elevated to university status in 2020.</p>
+                    <h3>B.Tech. in Computer Science and Engineering (Cyber Security)</h3>
+                    <p>The B.Tech. program is designed to prepare students for careers in cybersecurity, emphasizing technical and managerial aspects. Admission is based on the merit list of the Digital University Entrance Test (DUET), with a total tuition fee of INR 960,000.</p>
+                    <h3>M.Sc. in Computer Science with specialization in Cyber Security</h3>
+                    <p>The M.Sc. program focuses on advanced cybersecurity research and development. Admission is based on the merit list of the Graduate Aptitude Test in Engineering (GATE), with a total tuition fee of INR 120,000.</p>
+                </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="SRMIST">SRM Institute of Science and Technology (SRM IST)</span> - Launch into orbit with transformative education and cosmic opportunities at this esteemed institution.
+              <div id="SRMIST" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><h2>SRM Institute of Science and Technology (SRM IST)</h2>
+                    <p>SRM Institute of Science and Technology (SRM IST) is a prestigious private university in India known for offering diverse programs, including cyber security. The undergraduate cyber security program at SRM IST spans four years and encompasses a comprehensive curriculum covering essential topics such as network security, information security, cryptography, ethical hacking, computer forensics, and risk management. Designed to equip students with the necessary skills and knowledge to safeguard computer systems and networks from cyber threats, the course is highly regarded in the field.</p>
+                    <h3>Admission Process</h3>
+                    <p>Admission to the cyber security course at SRM IST is competitive, requiring students to demonstrate a strong academic background in mathematics and science. Prospective students must also successfully pass an entrance examination.</p>
+                    <h3>Course Structure</h3>
+                    <p>The cyber security curriculum at SRM IST is structured over eight semesters. The initial two semesters focus on general education, while the subsequent six semesters delve into specialized cyber security subjects.</p>
+                    <h3>Fee Structure</h3>
+                    <p>Tuition fees for the cyber security program at SRM IST vary depending on the campus, ranging from INR 800,000 to INR 1,400,000. Additionally, there is an admission fee of INR 10,000 and a hostel fee of INR 420,000.</p>
+                    <h3>Opportunities</h3>
+                    <p>Upon completion of the program, graduates have diverse career prospects, including roles as information security analysts, security architects, security engineers, security systems administrators, and IT security consultants.</p>
+                    <h3>Conclusion</h3>
+                    <p>With its well-structured curriculum, experienced faculty, and extensive job opportunities, the cyber security course at SRM IST presents an excellent choice for students aspiring to pursue a career in cyber security.</p>
+                </p>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <p>These cosmic academies nurture the next generation of cybersecurity guardians, guiding them to reach for the stars and beyond.</p>
+        </section>
+
+        <section id="bsc-colleges" class="astro-section bg-light">
+          <h2>Colleges Offering B.Sc Programs</h2>
+          <ul>
+            <li>
+              <span class="info" data-modal="CMS">CMS College of Science and Commerce</span>: Located in Kolkata, West Bengal
+              <div id="CMS" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><h2>CMS College of Science and Commerce Placements</h2>
+                    <p>The CMS College of Science and Commerce has not released the 2023 placement statistics yet. However, according to the NIRF report 2023...</p>
+                    <h3>CMS College of Science and Commerce Placements 2022:</h3>
+                    <ul>
+                        <li>The 2022 median package for UG (3-year) courses increased by nearly 23% when compared with 2021.</li>
+                        <li>An upsurge of 5% was recorded in the 2022 placement rate of MSc when compared with 2021.</li>
+                    </ul>
+                    <h3>CMS College of Science and Commerce Average Package 2023:</h3>
+                    <p>The average package offered during 2023 placements is yet to be released officially. However, the median salary is disclosed in the NIRF report...</p>
+                    <h4>CMS College of Science and Commerce Placements 2023: Highlights</h4>
+                    <ul>
+                        <li>The 2023 placement details are yet to be released.</li>
+                        <li>Out of 740 UG (3-year) graduates in 2022, 451 were placed.</li>
+                        <li>Out of 156 MSc students in 2022, 93 were placed.</li>
+                    </ul></p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="KR">KR Mangalam University</span>: Located in Gurgaon, Haryana
+              <div id="KR" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><h2>K.R. Mangalam University Cyber Security Course</h2>
+                    <p>K.R. Mangalam University offers a three-year B.Sc. (Hons.) in Cyber Security course at the UG level. The course is designed to provide students with the knowledge and skills they need to protect computer networks and systems from cyberattacks.</p>
+                    <p>To get admitted to the course, applicants must have passed the 12th grade with a minimum of 50% marks in aggregate. They must also have studied Mathematics, Statistics, Computer, or Information Science as one of their subjects.</p>
+                    <p>The course structure includes a mix of theoretical and practical components. Students will learn about the basics of cyber security, including network security, cryptography, and digital forensics. They will also gain hands-on experience with cutting-edge tools and technologies.</p>
+                    <p>The fee structure for the course is as follows:</p>
+                    <ul>
+                        <li>Tuition fee: INR 375,000</li>
+                        <li>Admission fee: INR 10,900</li>
+                        <li>Hostel fee: INR 500,000</li>
+                    </ul>
+                    <p>The course offers admission to 20 students.</p>
+                    <p>After completing the course, students will be eligible for a variety of jobs in the cyber security field, such as:</p>
+                    <ul>
+                        <li>Security analyst</li>
+                        <li>Security consultant</li>
+                        <li>Penetration tester/ethical hacker</li>
+                        <li>Network security engineer</li>
+                        <li>Security architect</li>
+                        <li>Security operations center analyst</li>
+                        <li>Chief information security officer</li>
+                        <li>Software developer</li>
+                        <li>Hardware engineer</li>
+                        <li>Web developer</li>
+                        <li>Security administrator</li>
+                        <li>Database administrator</li>
+                        <li>Malware analysis</li>
+                    </ul>
+                    <p>Cyber security is a growing field, and there is a high demand for qualified professionals. With a degree from K.R. Mangalam University, students will be well-positioned to secure a rewarding career in this field.</p>
+                </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="George">George Group of Colleges</span>: Located in Kolkata, West Bengal
+              <div id="George" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><h2>George Group of Colleges Cyber Security Course</h2>
+                    <h3>Admission Process</h3>
+                    <p>To be eligible for admission to the cyber security course at George Group of Colleges, you must have passed your 12th grade with a minimum of 50% marks in aggregate. You must also have a valid score in the JEE Main or NEET UG entrance exams.</p>
+                    <p>The admission process is as follows:</p>
+                    <ol>
+                        <li>Fill out an online application form and submit it along with the required documents.</li>
+                        <li>Attend an interview if shortlisted.</li>
+                        <li>Pay the admission fee and confirm your seat if selected.</li>
+                    </ol>
+                    <h3>Course Structure</h3>
+                    <p>The cyber security course at George Group of Colleges is a three-year program that covers a wide range of topics, including computer networks, data security, operating systems, programming languages, cryptography, ethical hacking, network security, and information security management.</p>
+                    <h3>Fee Structure</h3>
+                    <p>The fee structure for the cyber security course at George Group of Colleges is as follows:</p>
+                    <ul>
+                        <li>Tuition fee: INR 1,00,000 per year</li>
+                        <li>Examination fee: INR 10,000 per year</li>
+                        <li>Other fees: INR 10,000 per year</li>
+                    </ul>
+                    <h3>Opportunities</h3>
+                    <p>After completing the cyber security course at George Group of Colleges, you will have a wide range of job opportunities available to you, including:</p>
+                    <ul>
+                        <li>Information security analyst</li>
+                        <li>Security consultant</li>
+                        <li>Network security engineer</li>
+                        <li>Penetration tester</li>
+                        <li>Ethical hacker</li>
+                        <li>Security architect</li>
+                        <li>Chief information security officer (CISO)</li>
+                    </ul>
+                    <p>You can also choose to pursue higher education in cyber security, such as a Master of Science in Information Security.</p>
+                    <h3>Other Information</h3>
+                    <p>The cyber security course at George Group of Colleges is a highly regarded program that has produced many successful graduates. The college has a strong reputation for providing quality education and training in cyber security.</p>
+                    <p>The college also has a good placement record, with many of its graduates being placed in top companies in the cybersecurity industry.</p>
+                    <p>If you are interested in pursuing a career in cyber security, the cyber security course at George Group of Colleges is a great option to consider.</p>
+                </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="Karnavati">Karnavati University</span>: Located in Gandhinagar, Gujarat
+              <div id="Karnavati" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p> <h2>Karnavati University Cyber Security Course</h2>
+                    <h3>Course Overview</h3>
+                    <p>Karnavati University offers an Integrated B.Sc. + M.Sc. in Cyber Security. The course is a five-year program that aims to produce experts in protecting information systems against cyber threats.</p>
+                    <h3>Course Structure</h3>
+                    <p>The course structure includes both theoretical learning and practical experience, preparing students for leadership roles in the field. The curriculum covers topics such as:</p>
+                    <ul>
+                        <li>Network security</li>
+                        <li>Cryptography</li>
+                        <li>Digital forensics</li>
+                        <li>Malware analysis</li>
+                        <li>Ethical hacking</li>
+                        <li>Cyber Law and Ethics</li>
+                        <li>Vulnerability Analysis</li>
+                        <li>Security threat assessment</li>
+                        <li>Cyber security management</li>
+                        <li>Incident response</li>
+                    </ul>
+                    <h3>Admission Process</h3>
+                    <p>The admission process for the Integrated B.Sc. + M.Sc. in Cyber Security is based on the Karnavati University Admission Test (KUAT). Candidates who are shortlisted based on the entrance exam will have to appear for a personal interview. The last step includes verification of documents and Karnavati University admission fee payment.</p>
+                    <h3>Fee Structure</h3>
+                    <p>The fee structure for the Integrated B.Sc. + M.Sc. in Cyber Security is Rs. 6,00,000 to Rs. 8,50,000 per year.</p>
+                    <h3>Opportunities</h3>
+                    <p>After completing the course, students will have opportunities to work in a variety of fields, including:</p>
+                    <ul>
+                        <li>Information security</li>
+                        <li>Network security</li>
+                        <li>Cryptography</li>
+                        <li>Digital forensics</li>
+                        <li>Malware analysis</li>
+                        <li>Ethical hacking</li>
+                        <li>Cyber Law and Ethics</li>
+                        <li>Vulnerability Analysis</li>
+                        <li>Security threat assessment</li>
+                        <li>Cyber security management</li>
+                        <li>Incident response</li>
+                    </ul>
+               </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="THA">THA</span>: Located in Kolkata, West Bengal
+              <div id="THA" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><h2>Cyber Security Course Information</h2>
+                    <p>Cyber security courses are designed to teach students the skills and knowledge necessary to protect computer networks and systems from cyber-attacks. These courses typically cover a wide range of topics, including network security, cryptography, malware analysis, and ethical hacking.</p>
+                    <h3>Admission Process</h3>
+                    <p>The admission process for cyber security courses varies depending on the institution. However, most institutions require students to have a strong foundation in mathematics and computer science. Some institutions may also require students to have work experience in the IT industry.</p>
+                    <h3>Course Structure</h3>
+                    <p>Cyber security courses typically consist of a combination of lectures, labs, and hands-on exercises. Students will learn about the latest cyber-attacks and how to defend against them. They will also learn about the ethical and legal implications of cyber security.</p>
+                    <h3>Fee Structure</h3>
+                    <p>The fee structure for cyber security courses varies depending on the institution. However, most courses range in price from $10,000 to $20,000.</p>
+                    <h3>Opportunities</h3>
+                    <p>There are many opportunities for graduates of cyber security courses. They can find work in a variety of industries, including government, healthcare, and finance. They can also find work as security consultants or penetration testers.</p>
+                    <h3>Topics Covered</h3>
+                    <ul>
+                        <li>Network security</li>
+                        <li>Cryptography</li>
+                        <li>Malware analysis</li>
+                        <li>Ethical hacking</li>
+                        <li>Risk management</li>
+                        <li>Security assessment</li>
+                        <li>Incident response</li>
+                        <li>Disaster recovery</li>
+                        <li>Business continuity</li>
+                    </ul>
+                    <h3>Benefits</h3>
+                    <ul>
+                        <li>Gain the skills and knowledge necessary to protect computer networks and systems from cyber-attacks</li>
+                        <li>Learn about the latest cyber-attacks and how to defend against them</li>
+                        <li>Learn about the ethical and legal implications of cyber security</li>
+                        <li>Increase your job prospects</li>
+                        <li>Earn a higher salary</li>
+                    </ul>
+                </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="MET">MET</span>: Located in Mumbai, Maharashtra
+              <div id="MET" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><h2>MET Cyber Security Course Information</h2>
+                    <p>The MET Cyber Security Course is a 3-year undergraduate program that aims to provide students with the knowledge and skills necessary to protect computer networks and systems from cyber attacks. The course covers a wide range of topics, including network security, cryptography, malware analysis, and incident response.</p>
+                    <h3>Admission</h3>
+                    <p>Admission to the MET Cyber Security Course is based on merit. Students must have completed their 10+2 with a minimum of 50% marks in aggregate. They must also have appeared for the JEE Main or NEET UG entrance exams.</p>
+                    <h3>Course Structure</h3>
+                    <p>The course structure is designed to provide students with a comprehensive understanding of cyber security. The first year covers the basics of computer science and networking. The second year focuses on cyber security concepts and technologies. The third year includes a capstone project, in which students work on a real-world cyber security problem.</p>
+                    <h3>Fee Structure</h3>
+                    <p>The fee structure for the MET Cyber Security Course is Rs. 1,50,000 per year. There are also additional fees for hostel accommodation and mess charges.</p>
+                    <h3>Opportunities</h3>
+                    <p>After completing the MET Cyber Security Course, students can find employment in a variety of industries, including IT, finance, healthcare, and government. They can also pursue higher education in cyber security or related fields. Here are some of the opportunities that MET Cyber Security Course graduates can avail:</p>
+                    <ul>
+                        <li>Network Security Engineer</li>
+                        <li>System Security Engineer</li>
+                        <li>Information Security Analyst</li>
+                        <li>Security Architect</li>
+                        <li>Security Consultant</li>
+                        <li>Penetration Tester</li>
+                        <li>Malware Analyst</li>
+                        <li>Incident Responder</li>
+                        <li>Security Researcher</li>
+                        <li>Security Manager</li>
+                        <li>Chief Information Security Officer (CISO)</li>
+                    </ul>
+                    <p>The MET Cyber Security Course is a great option for students who are interested in a career in cyber security. The course provides students with the knowledge and skills they need to protect computer networks and systems from cyber attacks.</p>
+                </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="AVIT">AVIT</span>: Located in Kanchipuram, Tamil Nadu
+              <div id="AVIT" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><h2>AVIT Cyber Security Course Information</h2>
+                    <p>Aarupadai Veedu Institute of Technology (AVIT) offers a Bachelor of Engineering (BE) in Computer Science and Engineering (Cyber Security). The course is three years long and is offered full-time.</p>
+                    <h3>Eligibility</h3>
+                    <p>To be eligible for admission to the BE (CSE) Cyber Security course, candidates must have passed 12th standard with Mathematics, Physics, and Chemistry as subjects. They must also have scored at least 50% marks in the aggregate.</p>
+                    <h3>Admission Process</h3>
+                    <p>The admission process for the BE (CSE) Cyber Security course is based on merit. Candidates are shortlisted based on their marks in the 12th standard. Shortlisted candidates are then called for an interview.</p>
+                    <h3>Course Structure</h3>
+                    <p>The BE (CSE) Cyber Security course at AVIT covers a wide range of topics, including Introduction to Cyber Security, Network Security, Operating System Security, Application Security, Cryptography, and Information Security Management. The course also includes a project work in the final year.</p>
+                    <h3>Fee Structure</h3>
+                    <p>The fee structure for the BE (CSE) Cyber Security course at AVIT is as follows:
+                    <ul>
+                        <li>Tuition Fee: ₹1,50,000/- per year</li>
+                        <li>Miscellaneous Fee: ₹12,000/- for the first year and ₹10,000/- for subsequent years</li>
+                        <li>Examination Fee: As per University Norms</li>
+                    </ul>
+                    </p>
+                    <h3>Placement</h3>
+                    <p>AVIT has a good placement record. The college has tie-ups with many companies, including Byju's, HCL, Bolt, Infosys, Aramco, and Ashok Leyland. Approximately 70% of students get placed in various companies. The average salary package offered is 3 LPA to 10 LPA.</p>
+                    <p>Overall, the AVIT- cyber security course is a good option for students who are interested in a career in cyber security. The course is well-structured and covers a wide range of topics. The college also has a good placement record.</p>
+                </p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+      <section id="certificate-colleges" class="astro-section bg-light">
+        <h2>Colleges Offering Online Certificate Courses</h2>
+        <ul>
+          <li>
+            <span class="info" data-modal="IITD">IIT Delhi</span>
+            <div id="IITD" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <p><h2>IIT Delhi Certificate Programme in Cybersecurity</h2>
+                  <p>The IIT Delhi Certificate Programme in Cybersecurity: Foundations and Pragmatics is a six-month online course designed for professionals who want to gain a comprehensive understanding of cybersecurity. The course is led by experienced faculty members from IIT Delhi and covers various aspects of cybersecurity, including network security, web security, cryptography, and incident response.</p>
+                  <h3>Admission Process</h3>
+                  <ul>
+                      <li>Candidates must have a bachelor's degree in engineering or a related field from a recognized university.</li>
+                      <li>Candidates must have at least two years of work experience in the IT industry.</li>
+                      <li>Candidates must submit an online application form along with their resume and transcripts.</li>
+                      <li>Shortlisted candidates will be called for an interview.</li>
+                  </ul>
+                  <h3>Course Structure</h3>
+                  <ul>
+                      <li>Module 1: Introduction to Cybersecurity</li>
+                      <li>Module 2: Network Security</li>
+                      <li>Module 3: Web Security</li>
+                      <li>Module 4: Cryptography</li>
+                      <li>Module 5: Incident Response</li>
+                      <li>Module 6: Capstone Project</li>
+                  </ul>
+                  <h3>Fee Structure</h3>
+                  <p>The total fee for the course is Rs. 1,18,000 (including taxes).</p>
+                  <p>The fee can be paid in installments.</p>
+                  <h3>Opportunities</h3>
+                  <ul>
+                      <li>Students who complete the course will receive a certificate of completion from IIT Delhi.</li>
+                      <li>Students will be able to apply for jobs in the cybersecurity field.</li>
+                      <li>Students will be able to start their own cybersecurity consulting business.</li>
+                  </ul>
+                  <p>The course is a great opportunity for professionals who want to gain a comprehensive understanding of cybersecurity and advance their careers in the field.</p>
+              </p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <span class="info" data-modal="IITK">IIT Kanpur</span>
+            <div id="IITK" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <p><h2>IIT Kanpur Cyber Security Certificate Course</h2>
+                  <p>The Indian Institute of Technology Kanpur (IIT Kanpur) offers an online Cyber Security certificate course. The course is designed to teach students the fundamental concepts of Cyber Defence and Cyber Security. The course consists of security of system, software, network, web, mobile platforms, and even hardware & supply chain security. The course covers everything that you need to know about cyber security and make you job-ready.</p>
+                  <h3>Admission Process</h3>
+                  <ul>
+                      <li>Candidates must have completed their graduation with a minimum of 55% marks.</li>
+                      <li>Fill an online application form.</li>
+                      <li>Pay an application fee of INR 1500.</li>
+                      <li>Submit transcripts, mark sheets, and other relevant documents.</li>
+                      <li>Appear for an interview.</li>
+                      <li>Selected candidates must pay the admission fee and the tuition fee.</li>
+                  </ul>
+                  <h3>Course Structure</h3>
+                  <ul>
+                      <li>The course is divided into 12 modules, each lasting for 3 months.</li>
+                      <li>Modules include Introduction to Cyber Security, Network Security, System Security, Application Security, Cryptography, Ethical Hacking, Security Testing, Incident Response, Risk Management, Compliance, Security Architecture, and Project.</li>
+                  </ul>
+                  <h3>Fee Structure</h3>
+                  <p>The total tuition fee for the course is INR 540000. There is also a one-time admission fee of INR 200000.</p>
+                  <p>Tuition fee and admission fee are payable in installments.</p>
+                  <h3>Opportunities</h3>
+                  <p>After completing the course, candidates can find jobs as Information Security Analyst, Network Security Engineer, System Security Engineer, Application Security Engineer, Cryptographer, Ethical Hacker, Security Tester, Incident Responder, Risk Manager, Compliance Officer, Security Architect, or start their own company or work as a freelancer.</p>
+              </p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <span class="info" data-modal="Jain">Jain Online University</span>
+            <div id="Jain" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <p><h2>Jain Online University Cybersecurity Course</h2>
+                  <h3>Admission Process</h3>
+                  <ul>
+                      <li>Bachelor's degree from an accredited institution.</li>
+                      <li>Strong understanding of computer science and information technology.</li>
+                      <li>Submit an online application.</li>
+                      <li>Provide official transcripts.</li>
+                      <li>Submit a resume or CV.</li>
+                      <li>Write a personal statement.</li>
+                      <li>Pay the application fee.</li>
+                  </ul>
+                  <h3>Course Structure</h3>
+                  <p>The online cybersecurity course at Jain Online University is a 30-credit program covering topics such as network security, system security, application security, cryptography, risk assessment, and incident response. It includes online lectures, readings, assignments, and a capstone project.</p>
+                  <h3>Fee Structure</h3>
+                  <p>Tuition: $500 per credit</p>
+                  <p>Total Cost: $15,000</p>
+                  <h3>Opportunities</h3>
+                  <p>Graduates are prepared for careers as information security analysts, security engineers, network security engineers, security architects, and Chief Information Security Officers (CISOs). The field is growing rapidly with high demand for qualified professionals.</p>
+                  <h3>Additional Details</h3>
+                  <ul>
+                      <li>Part-time program allowing students to work full-time.</li>
+                      <li>Taught by experienced cybersecurity professionals.</li>
+                      <li>Accredited by the National Center for Education Statistics (NCES).</li>
+                  </ul>
+                  <p>If interested, visit the university's website or contact the admissions office for more information.</p>
+              </p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <span class="info" data-modal="IIITB">IIIT Bangalore</span>
+            <div id="IIITB" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <p><h2>Advanced Executive Program in Cybersecurity at IIIT Bangalore</h2>
+                  <p>The Advanced Executive Program in Cybersecurity at IIIT Bangalore is a 6-month online course that offers a certificate. It is designed for professionals who want to transition into cybersecurity roles, and it is offered in partnership with NPCI. The course curriculum covers a wide range of topics, including enterprise infrastructure security, application and web application security, ransomware and malware analysis, ethical hacking, and VAPT. The course also features a virtual internship, which gives students the opportunity to apply what they have learned in a real-world setting.</p>
+                  <h3>Admission Requirements</h3>
+                  <ul>
+                      <li>Bachelor's degree in any discipline with at least 50% aggregate marks.</li>
+                      <li>Work experience or technical background not mandatory.</li>
+                  </ul>
+                  <p>The selection process is based on the application submitted, and shortlisted candidates will be invited for an interview.</p>
+                  <h3>Tuition Fee</h3>
+                  <p>Total tuition fee: INR 185,000</p>
+                  <h3>Opportunities</h3>
+                  <p>Graduates may pursue careers as cybersecurity analysts, security engineers, information security consultants, security architects, and Chief Information Security Officers (CISOs). The demand for cybersecurity professionals is growing rapidly, and graduates of this program will be well-positioned to take advantage of this growing demand.</p>
+              </p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <span class="info" data-modal="Amity">Amity University Online</span>
+            <div id="Amity" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <p><h2>Online Post Graduate Program in Cyber Security at Amity Online</h2>
+                  <p>The Online Post Graduate Program in Cyber Security at Amity Online is an 8-month course offered at the certificate level. To get admitted to the course, applicants must meet the entry requirements of 50.0% in graduation. The total tuition fee for the course is INR 125,000.</p>
+                  <h3>Course Structure</h3>
+                  <ul>
+                      <li>Semester 1: Internet Technology, Report on Workshop/Social Work, Communication Skills, and Mathematical Foundation to Computer Science.</li>
+                      <li>Semester 2: Cyber Security Fundamentals, Information Security Management, Network Security, and Ethical Hacking.</li>
+                  </ul>
+                  <p>The course is designed to provide students with the knowledge and skills they need to work in the field of cyber security. Upon completion of the course, students will be able to identify and assess cyber security risks, implement security measures to protect against cyber attacks, conduct security audits and investigations, and respond to cyber security incidents.</p>
+                  <h3>Admission Process</h3>
+                  <p>The admission process for Amity Online involves selecting your preferred course, submitting the online application form along with necessary documents, and, upon acceptance, finalizing enrollment by fulfilling the fee payment requirements. The application form is available online for a fee of Rs.1,500. The form cost is non-refundable.</p>
+                  <p>Applicants need to submit the following documents along with the application form:</p>
+                  <ul>
+                      <li>Scanned copy of original class 10th board mark-sheet</li>
+                  </ul>
+                  <p>The admission process for PG and UG programs at Amity University begins in January or February.</p>
+                  <h3>About Amity University Online</h3>
+                  <p>Amity University Online is India's 1st UGC Approved online UG/ PG Degree. The university offers a range of courses, including BCA, MCA, MBA, and B.Tech. Amity University Online has a strong track record of placement, with the university's placement cell working closely with leading companies to ensure that students are placed in top companies such as IBM, Wipro, Infosys, and TCS. The university also offers a variety of academic support services to help students succeed.</p>
+              </p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <span class="info" data-modal="BITS">BITS Pilani (WILP)</span>
+            <div id="BITS" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <p><h2>BITS Pilani's WILP Cybersecurity Courses</h2>
+                  <p>BITS Pilani's Work Integrated Learning Programmes (WILP) offer a variety of online certificate courses in cybersecurity. These courses are designed to help working professionals develop the skills and knowledge they need to succeed in the cybersecurity field.</p>
+                  <h3>Admission Process</h3>
+                  <p>The admission process for the WILP cybersecurity courses is relatively straightforward. Applicants must have a bachelor's degree in any discipline from a recognized university and at least two years of work experience in a relevant field.</p>
+                  <h3>Course Structure</h3>
+                  <p>The course structure for the WILP cybersecurity courses varies depending on the specific course. However, all of the courses cover a wide range of topics, including network security, application security, cryptography, information security management, and risk assessment and compliance.</p>
+                  <h3>Fee Structure</h3>
+                  <p>The fee structure for the WILP cybersecurity courses also varies depending on the specific course, but all of the courses are relatively affordable.</p>
+                  <h3>Opportunities</h3>
+                  <p>Upon completion of a WILP cybersecurity course, graduates will have the skills and knowledge they need to pursue a career in cybersecurity. They will also be eligible for a variety of job opportunities, including security analyst, security engineer, security architect, security consultant, and Chief Information Security Officer (CISO).</p>
+                  <p>The WILP cybersecurity courses are a great way for working professionals to develop the skills and knowledge they need to succeed in the cybersecurity field. The courses are affordable, convenient, and offer a variety of job opportunities upon completion.</p>
+                  <h3>Additional Details</h3>
+                  <ul>
+                      <li>The courses are offered online, allowing students to learn at their own pace.</li>
+                      <li>The courses are taught by experienced cybersecurity professionals.</li>
+                      <li>The courses are designed to help students pass the Certified Information Systems Security Professional (CISSP) exam.</li>
+                  </ul>
+              </p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <span class="info" data-modal="Manav">Manav Rachna Centre for Distance and Online Education</span>
+            <div id="Manav" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <p><h2>MRCDOE Online Cyber Security Course</h2>
+                  <h3>Admission Process</h3>
+                  <ul>
+                      <li>Applicants must have a bachelor's degree in any discipline from a recognized university.</li>
+                      <li>Applicants must submit an online application form along with the required documents, such as transcripts, mark sheets, and a resume.</li>
+                      <li>Applicants must appear for an online interview.</li>
+                  </ul>
+                  <h3>Course Structure</h3>
+                  <p>The online cyber security course is a comprehensive program that covers all aspects of cyber security, from the basics of computer security to the latest trends in cybercrime. The course is divided into several modules, including:</p>
+                  <ul>
+                      <li>Introduction to Cyber Security</li>
+                      <li>Network Security</li>
+                      <li>Operating System Security</li>
+                      <li>Application Security</li>
+                      <li>Database Security</li>
+                      <li>Cryptography</li>
+                      <li>Information Security Management</li>
+                      <li>Ethical Hacking</li>
+                  </ul>
+                  <h3>Fee Structure</h3>
+                  <p>The total fee for the online cyber security course is INR 1,50,000, which can be paid in installments.</p>
+                  <h3>Opportunities</h3>
+                  <p>Upon successful completion of the course, students will be awarded a certificate in cyber security. Some of the job opportunities that students can pursue include:</p>
+                  <ul>
+                      <li>Information Security Analyst</li>
+                      <li>Network Security Engineer</li>
+                      <li>Security Architect</li>
+                      <li>Security Consultant</li>
+                      <li>Penetration Tester</li>
+                      <li>Chief Information Security Officer (CISO)</li>
+                  </ul>
+                  <p>The online cyber security course offered by MRCDOE is a great opportunity for students and working professionals interested in pursuing a career in cyber security. The course is comprehensive, affordable, and flexible, providing students with the skills and knowledge they need for success in the field.</p>
+             </p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <span class="info" data-modal="NFSU">National Forensic Sciences University</span>
+            <div id="NFSU" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <p> <h2>NFSU Certificate Course in Cyber Security</h2>
+                  <h3>Admission Process</h3>
+                  <p>The admission process for the Certificate Course in Cyber Security is based on merit. Candidates must have a Bachelor's degree in any discipline from a recognized university with a minimum of 50% marks. The selection process will be based on the candidate's performance in the entrance examination and the interview.</p>
+                  <h3>Course Structure</h3>
+                  <p>The Certificate Course in Cyber Security is a one-year program that covers a wide range of topics related to cyber security, including:</p>
+                  <ul>
+                      <li>Introduction to Cyber Security</li>
+                      <li>Network Security</li>
+                      <li>System Security</li>
+                      <li>Application Security</li>
+                      <li>Cryptography</li>
+                      <li>Information Security Management</li>
+                      <li>Cyber Forensics</li>
+                  </ul>
+                  <h3>Fee Structure</h3>
+                  <p>The total fee for the Certificate Course in Cyber Security is INR 40,000. The fee can be paid in installments.</p>
+                  <h3>Opportunities</h3>
+                  <p>After completing the Certificate Course in Cyber Security, candidates will be able to find employment in a variety of roles, including:</p>
+                  <ul>
+                      <li>Cyber Security Analyst</li>
+                      <li>Information Security Analyst</li>
+                      <li>Network Security Engineer</li>
+                      <li>System Security Engineer</li>
+                      <li>Security Consultant</li>
+                      <li>Cyber Forensics Investigator</li>
+                  </ul>
+                  <p>NFSU has a strong placement record, with over 90% of its graduates being placed in leading companies in the field of cyber security. The university also has a number of tie-ups with industry partners, which provides students with opportunities for internships and placements.</p>
+                  <h3>Conclusion</h3>
+                  <p>The Certificate Course in Cyber Security at NFSU is a great option for candidates who are interested in a career in cyber security. The course is well-structured and covers a wide range of topics related to cyber security. The university has a strong placement record and provides students with opportunities for internships and placements.</p>
+              </p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <span class="info" data-modal="IIBM">IIBM Institute of Business Management</span>
+            <div id="IIBM" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <p><h2>IIBM Cyber Security Course</h2>
+                  <h3>Admission Process</h3>
+                  <p>To be eligible for admission to the IIBM cyber security course, applicants must meet the following criteria:</p>
+                  <ul>
+                      <li>Have completed their 10+2 education from a recognized board or possess an equivalent qualification.</li>
+                      <li>Have a diploma in any field.</li>
+                  </ul>
+                  <p>The admission process for the IIBM cyber security course is as follows:</p>
+                  <ol>
+                      <li>Applicants must submit an online application form along with the required documents.</li>
+                      <li>Shortlisted candidates will be called for an interview.</li>
+                      <li>Final selection will be based on the candidate's performance in the interview and their academic qualifications.</li>
+                  </ol>
+                  <h3>Course Structure</h3>
+                  <p>The IIBM cyber security course is a 12-month online program. The course covers a wide range of topics, including:</p>
+                  <ul>
+                      <li>Introduction to cyber security</li>
+                      <li>Cyber security threats and vulnerabilities</li>
+                      <li>Network security</li>
+                      <li>System security</li>
+                      <li>Application security</li>
+                      <li>Cryptography</li>
+                      <li>Information security management</li>
+                  </ul>
+                  <h3>Fee Structure</h3>
+                  <p>The total fee for the IIBM cyber security course is INR 45,000. The fee can be paid in installments.</p>
+                  <h3>Opportunities</h3>
+                  <p>After completing the IIBM cyber security course, students will have the opportunity to pursue a career in a variety of fields, including:</p>
+                  <ul>
+                      <li>Information security</li>
+                      <li>Network security</li>
+                      <li>System security</li>
+                      <li>Application security</li>
+                      <li>Security consulting</li>
+                      <li>Security research</li>
+                  </ul>
+                  <p>IIBM also offers placement assistance to its students.</p>
+                  <h3>Other Information</h3>
+                  <p>The IIBM cyber security course is a recognized course by the corporate sector, MNCs, private sector, and other industries. IIBM is not a university, so it does not conduct post graduate degrees or diplomas. The IIBM cyber security program does not lead to any degree.</p>
+                  <h3>Conclusion</h3>
+                  <p>The IIBM cyber security course is a good option for students who are interested in pursuing a career in information security. The course is affordable, well-structured, and offers good placement opportunities.</p>
+              </p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <span class="info" data-modal="ICASR">ICASR</span>
+            <div id="ICASR" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <p><h2>ICASR Cyber Security Course</h2>
+                  <h3>Admission Process</h3>
+                  <p>The admission process for the ICASR Certificate Course in Cyber Security is based on merit. Students who have completed a Bachelor's degree in any discipline are eligible to apply. The application process includes submitting an application form, a statement of purpose, and two letters of recommendation.</p>
+                  <h3>Course Structure</h3>
+                  <p>The ICASR Certificate Course in Cyber Security consists of the following modules:</p>
+                  <ol>
+                      <li>Introduction to Cyber Security</li>
+                      <li>Network Security</li>
+                      <li>System Security</li>
+                      <li>Application Security</li>
+                      <li>Cryptography</li>
+                      <li>Ethical Hacking</li>
+                      <li>Cyber Law and Forensics</li>
+                  </ol>
+                  <h3>Fee Structure</h3>
+                  <p>The fee structure for the course is INR 50,000 for Indian Nationals and USD 1,000 for International Students.</p>
+                  <h3>Delivery Method</h3>
+                  <p>The course is delivered online, allowing students to access course materials and interact with faculty through a learning management system. The course typically spans six months.</p>
+                  <h3>Opportunities</h3>
+                  <p>Upon completion of the course, students will be awarded a Certificate in Cyber Security from ICASR. This certificate is recognized by employers in the IT industry. Graduates of the course can pursue various opportunities including:</p>
+                  <ul>
+                      <li>Network Security Engineer</li>
+                      <li>System Security Engineer</li>
+                      <li>Application Security Engineer</li>
+                      <li>Security Analyst</li>
+                      <li>Security Consultant</li>
+                      <li>Ethical Hacker</li>
+                      <li>Forensic Analyst</li>
+                  </ul>
+                  <p>The cyber security industry is rapidly growing, and graduates of the ICASR Certificate Course in Cyber Security are well-positioned to meet the demand for qualified professionals.</p>
+              </p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+    
+      
+
+        <section id="top-companies" class="astro-section bg-light">
+          <h2>Top Companies Based on Cybersecurity in India</h2>
+          <p>Enter the cosmic arena of cybersecurity and explore the celestial companies leading the charge:</p>
+          <ul>
+            <li>
+              <span class="info" data-modal="Wipro">Wipro</span>- Illuminating the cosmos with its innovative solutions and stellar services in the realm of cybersecurity.
+              <div id="Wipro" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><h1>Wipro Cyber Security Course for Freshers</h1>
+                    <p>Wipro is a global information technology, consulting, and business process services company. It offers a range of cybersecurity courses, including a cyber security course for freshers.</p>
+                    <p>The Wipro cyber security course for freshers is a comprehensive program that covers the basics of cybersecurity, including computer networks, operating systems, and security tools. It also covers advanced topics such as intrusion detection, malware analysis, and risk management.</p>
+                    <p>The course is designed to help students develop the skills they need to start a career in cybersecurity. It is taught by experienced cybersecurity professionals who share their knowledge and expertise with students.</p>
+                    <h2>Recruitment Process</h2>
+                    <p>The Wipro cyber security course for freshers is a competitive program. Interested students must apply online. Wipro will review applications and select students for interviews. Selected students will be asked to demonstrate their skills and knowledge of cybersecurity.</p>
+                    <h2>Skills Required</h2>
+                    <p>Students interested in the Wipro cyber security course for freshers should have a strong foundation in computer science and mathematics. They should also be able to think critically and solve problems.</p>
+                    <h2>Opportunities</h2>
+                    <p>Upon successful completion of the Wipro cyber security course for freshers, students will have the skills and knowledge they need to start a successful career in cybersecurity. There are many opportunities for cybersecurity professionals in industries such as healthcare, finance, and government.</p>
+                    <h3>Additional Details</h3>
+                    <ul>
+                        <li>The course is 12 weeks long and is offered online.</li>
+                        <li>It is taught by experienced cybersecurity professionals.</li>
+                        <li>The curriculum covers a wide range of topics, including computer networks, operating systems, security tools, intrusion detection, malware analysis, and risk management.</li>
+                        <li>Students who successfully complete the course will receive a certificate of completion.</li>
+                    </ul>
+                    <p>If you are interested in a career in cybersecurity, the Wipro cyber security course for freshers is a great option. It will give you the skills and knowledge you need to start a successful career in this exciting field.</p>
+                </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="Infosys">Infosys</span>: A cosmic beacon of excellence, offering cosmic cybersecurity solutions tailored to the needs of the universe.
+              <div id="Infosys" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><h1>Infosys Cyber Security Course</h1>
+                    <h2>Recruitment Process</h2>
+                    <p>The recruitment process for the Infosys Cyber Security course is as follows:</p>
+                    <ol>
+                        <li><strong>Online Test:</strong> The online test is the initial step in the recruitment process. It will be conducted for an hour in a particular center for the examination. This online test will check the candidate's skill-on, Verbal, Logic, and Pseudo Code. Each section should be completed within the time limit.</li>
+                        <li><strong>Technical Interview:</strong> The technical interview is an important part of the Infosys hiring process. In this round, candidates are tested on their technical knowledge and skills.</li>
+                        <li><strong>HR Interview:</strong> The HR interview is the final round of the recruitment process. In this round, candidates are assessed on their communication skills, personality, and fit with the Infosys culture.</li>
+                    </ol>
+                    <h2>Skills Required</h2>
+                    <p>The following skills are required for the Infosys Cyber Security course:</p>
+                    <ul>
+                        <li><strong>Technical skills:</strong> Candidates should have a strong understanding of computer networking, security concepts, and operating systems.</li>
+                        <li><strong>Analytical skills:</strong> Candidates should be able to analyze security threats and vulnerabilities, and develop solutions to mitigate them.</li>
+                        <li><strong>Problem-solving skills:</strong> Candidates should be able to identify and solve security problems in a timely and efficient manner.</li>
+                        <li><strong>Communication skills:</strong> Candidates should be able to communicate complex technical concepts to both technical and non-technical audiences.</li>
+                        <li><strong>Teamwork skills:</strong> Candidates should be able to work effectively as part of a team to protect an organization's IT infrastructure.</li>
+                    </ul>
+                    <h2>Opportunities</h2>
+                    <p>After completing the Infosys Cyber Security course, candidates will have the opportunity to work in a variety of roles, including:</p>
+                    <ul>
+                        <li>Security Analyst</li>
+                        <li>Security Engineer</li>
+                        <li>Security Architect</li>
+                        <li>Security Consultant</li>
+                        <li>Chief Information Security Officer (CISO)</li>
+                    </ul>
+                    <p>The average salary for a Cyber Security Analyst at Infosys is ₹6.8 Lakhs per year for employees with less than 1 year of experience to 7 years. The salary range for a Cyber Security Analyst at Infosys is between ₹2.8 Lakhs to ₹11.8 Lakhs per year.</p>
+                    <h2>Conclusion</h2>
+                    <p>The Infosys Cyber Security course is a great opportunity for candidates who are interested in a career in cyber security. The course provides candidates with the skills and knowledge they need to be successful in this field. After completing the course, candidates will have the opportunity to work in a variety of roles in the cyber security industry.</p>
+                </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="TechMahindra">Tech Mahindra</span> - Harnessing the power of cosmic technology to safeguard galaxies against cyber threats.
+              <div id="TechMahindra" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><h1>Tech Mahindra Cyber Security Course</h1>
+                    <h2>Recruitment Process</h2>
+                    <p>The recruitment process for the Tech Mahindra Cyber Security Course is as follows:</p>
+                    <ol>
+                        <li><strong>Written test:</strong> This test will assess your aptitude and reasoning skills.</li>
+                        <li><strong>Technical test:</strong> This test will assess your technical knowledge and skills.</li>
+                        <li><strong>Interview:</strong> This will be a one-on-one interview with a Tech Mahindra representative.</li>
+                        <li><strong>HR round:</strong> This round will assess your communication skills, personality, and fitment with the company culture and values.</li>
+                    </ol>
+                    <h2>Skills Required</h2>
+                    <p>The following skills are required for the Tech Mahindra Cyber Security Course:</p>
+                    <ul>
+                        <li>Excellent communication and interpersonal skills.</li>
+                        <li>In-depth technical knowledge.</li>
+                        <li>Proficient coding skills.</li>
+                        <li>Good problem-solving skills.</li>
+                    </ul>
+                    <h2>Opportunities</h2>
+                    <p>After completing the Tech Mahindra Cyber Security Course, you will be eligible for a variety of cyber security positions, such as:</p>
+                    <ul>
+                        <li>Security analyst</li>
+                        <li>Security engineer</li>
+                        <li>Security architect</li>
+                        <li>Security consultant</li>
+                        <li>Chief information security officer (CISO)</li>
+                    </ul>
+                    <p>The average annual salary for a cyber security professional in India is ₹3.3 Lakhs. The salary range for a fresher is ₹1.2 L/yr - ₹6 L/yr.</p>
+                    <h2>Course Details</h2>
+                    <p>The Tech Mahindra Cyber Security Course is a 6-month course that covers the following topics:</p>
+                    <ul>
+                        <li>Cyber threats in India</li>
+                        <li>Cybercrime and its impact on individuals and businesses</li>
+                        <li>Website design, layout, and coding</li>
+                        <li>Vulnerability assessment and penetration testing</li>
+                        <li>IAM Essentials</li>
+                    </ul>
+                    <p>The course is designed to provide hands-on training in cybersecurity, teaching participants to identify and address vulnerabilities through assessments and penetration tests.</p>
+                    <h2>Eligibility</h2>
+                    <p>To be eligible for the Tech Mahindra Cyber Security Course, you must have a bachelor's degree in computer science or a related field. You must also have at least 2 years of experience in the IT industry.</p>
+                    <h2>How to Apply</h2>
+                    <p>To apply for the Tech Mahindra Cyber Security Course, you can visit the Tech Mahindra website and fill out the online application form. You will need to provide your personal information, educational qualifications, and work experience. You will also need to upload your resume and a cover letter.</p>
+                    <h2>Conclusion</h2>
+                    <p>The Tech Mahindra Cyber Security Course is a great opportunity for individuals who are interested in a career in cybersecurity. The course provides hands-on training in the latest cybersecurity techniques and tools. After completing the course, you will be eligible for a variety of cyber security positions in India.</p>
+                </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="HCLTechnologies">HCL Technologies</span> - Pushing the boundaries of cosmic cybersecurity with its advanced solutions and cosmic expertise.
+              <div id="HCLTechnologies" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><h1>HCL Technologies Cybersecurity Programs</h1>
+                    <h2>Graduate Program in Cybersecurity</h2>
+                    <p>The Graduate Program in Cybersecurity at HCL Technologies is designed to prepare students for a career in cybersecurity. It covers a wide range of topics, including:</p>
+                    <ul>
+                        <li>Network security</li>
+                        <li>System security</li>
+                        <li>Application security</li>
+                        <li>Cryptography</li>
+                        <li>Risk assessment and management</li>
+                        <li>Incident response</li>
+                    </ul>
+                    <p>The program is open to students who have completed a bachelor's degree in computer science, information technology, or a related field. Students must also have a strong understanding of networking and operating systems.</p>
+                    <p>The recruitment process for the program is highly competitive:</p>
+                    <ol>
+                        <li>Students must submit an online application and resume.</li>
+                        <li>Shortlisted candidates will be invited for a technical interview.</li>
+                        <li>Successful candidates will be invited for an HR interview.</li>
+                        <li>Final selection will be based on the candidate's performance in the technical and HR interviews, as well as their academic qualifications.</li>
+                    </ol>
+                    <p>Upon successful completion of the program, students will be eligible for a variety of cybersecurity positions at HCL Technologies, including:</p>
+                    <ul>
+                        <li>Security analyst</li>
+                        <li>Security engineer</li>
+                        <li>Security architect</li>
+                        <li>Security consultant</li>
+                        <li>Incident responder</li>
+                    </ul>
+                    <p>In addition to the Graduate Program in Cybersecurity, HCL Technologies also offers a number of other cybersecurity courses, including:</p>
+                    <ul>
+                        <li>Certified Ethical Hacker (CEH)</li>
+                        <li>Certified Information Systems Security Professional (CISSP)</li>
+                        <li>Certified Cloud Security Professional (CCSP)</li>
+                        <li>Security+</li>
+                        <li>Network+</li>
+                        <li>CySA+</li>
+                    </ul>
+                    <p>These courses are designed to help professionals develop the skills and knowledge they need to succeed in a variety of cybersecurity roles.</p>
+                </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="Accenture">Accenture</span> - Guiding cosmic entities through the labyrinth of cybersecurity challenges with its cosmic services and cosmic insights.
+              <div id="Accenture" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><h1>Accenture Cybersecurity Courses</h1>
+                    <p>Accenture offers a range of cybersecurity courses to help individuals develop the skills they need to succeed in this growing field. The courses cover a variety of topics, including:</p>
+                    <ul>
+                        <li>Security fundamentals</li>
+                        <li>Risk management</li>
+                        <li>Vulnerability assessment and penetration testing</li>
+                        <li>Incident response</li>
+                        <li>Security architecture</li>
+                        <li>Security operations</li>
+                    </ul>
+                    <p>The courses are designed for both beginners and experienced professionals and are taught by industry experts. Accenture also offers a number of certifications in cybersecurity, which can help individuals demonstrate their skills to potential employers.</p>
+                    <p>The recruitment process for Accenture's cybersecurity courses is competitive. Applicants must have a strong academic background in computer science or a related field and experience with cybersecurity tools and technologies. Accenture also looks for candidates with strong analytical and problem-solving skills.</p>
+                    <p>Once accepted into a course, students will have access to a variety of resources, including:</p>
+                    <ul>
+                        <li>Online learning modules</li>
+                        <li>Live webinars</li>
+                        <li>Hands-on labs</li>
+                        <li>Access to industry experts</li>
+                    </ul>
+                    <p>Upon completion of a course, students will receive a certificate of completion from Accenture. They will also be eligible to apply for jobs at Accenture and other companies in the cybersecurity field.</p>
+                    <p>Here are some of the skills that are required for a career in cybersecurity:</p>
+                    <ul>
+                        <li>Technical skills: Cybersecurity professionals need to have a strong understanding of computer systems, networks, and security technologies.</li>
+                        <li>Analytical skills: Cybersecurity professionals need to be able to analyze data and identify potential security threats.</li>
+                        <li>Problem-solving skills: Cybersecurity professionals need to be able to develop and implement solutions to security problems.</li>
+                        <li>Communication skills: Cybersecurity professionals need to be able to communicate effectively with technical and non-technical audiences.</li>
+                    </ul>
+                    <p>There are many opportunities available for cybersecurity professionals. Cybersecurity professionals can work in a variety of industries, including:</p>
+                    <ul>
+                        <li>Information technology</li>
+                        <li>Finance</li>
+                        <li>Healthcare</li>
+                        <li>Government</li>
+                        <li>Education</li>
+                    </ul>
+                    <p>Cybersecurity professionals can also work for consulting firms, system integrators, and security vendors.</p>
+                    <p>The job outlook for cybersecurity professionals is excellent. The Bureau of Labor Statistics projects that employment of information security analysts will grow by 33% from 2020 to 2030, much faster than the average for all occupations.</p>
+                    <p>If you are interested in a career in cybersecurity, Accenture's courses can help you develop the skills you need to succeed.</p>
+                </p>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <p>These celestial companies are at the forefront of defending the universe against cyber threats, safeguarding cosmic civilizations with their cosmic expertise.</p>
+        </section>
+
+        <section id="top-recruiters" class="astro-section bg-light">
+          <h2>Top Recruiters for Cyber Forensic Experts in India</h2>
+          <ul>
+            <li>
+              <span class="info" data-modal="Skylark">Skylark Information Technologies Private Limited</span>
+              <div id="Skylark" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><h1>Skylark Cyber Security Course</h1>
+                    <p>Skylark Information Technologies Private Limited (Skylark) is a global IT services provider that offers a variety of courses, including a cyber security course. The cyber security course is designed to help students develop the skills they need to protect computer networks and systems from cyber attacks.</p>
+                    <p>The recruitment process for the cyber security course is competitive. Applicants must have a strong academic background in computer science or a related field. They must also have experience with cyber security tools and techniques. The recruitment process includes a written test, a technical interview, and a background check.</p>
+                    <p>The cyber security course covers a wide range of topics, including:</p>
+                    <ul>
+                        <li>Network security</li>
+                        <li>System security</li>
+                        <li>Application security</li>
+                        <li>Cryptography</li>
+                        <li>Risk assessment</li>
+                        <li>Incident response</li>
+                    </ul>
+                    <p>Students who complete the cyber security course will be well-prepared for a career in cyber security. They will have the skills they need to protect computer networks and systems from cyber attacks.</p>
+                    <p>There are many opportunities for cyber security professionals. Cyber security professionals are in high demand in a variety of industries, including:</p>
+                    <ul>
+                        <li>Financial services</li>
+                        <li>Healthcare</li>
+                        <li>Government</li>
+                        <li>Technology</li>
+                        <li>Education</li>
+                    </ul>
+                    <p>Cyber security professionals can expect to earn a good salary. The average salary for a cyber security professional in the United States is $103,590 per year.</p>
+                    <p>If you are interested in a career in cyber security, the cyber security course at Skylark Information Technologies Private Limited is a great option. The course will give you the skills you need to succeed in this growing field.</p>
+                    <p>Here are some additional details about the cyber security course at Skylark Information Technologies Private Limited:</p>
+                    <ul>
+                        <li>The course is 12 weeks long.</li>
+                        <li>The course is offered online and in person.</li>
+                        <li>The cost of the course is ₹ 20,000.</li>
+                        <li>Students who complete the course will receive a certificate of completion.</li>
+                    </ul>
+                    <p>If you have any further questions about the cyber security course at Skylark Information Technologies Private Limited, please contact the company directly.</p>
+                </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="Incognito">Incognito Forensic Foundation</span>
+              <div id="Incognito" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><h1>Incognito Forensic Foundation Cyber Security Course</h1>
+                    <p>Incognito Forensic Foundation (IFF) is a non-profit organization that provides cyber security training and certification. IFF offers a variety of courses, including a cyber security course that covers topics such as network security, ethical hacking, and digital forensics.</p>
+                    <p>The IFF cyber security course is designed to give students the skills they need to enter a career in cyber security. The course covers a wide range of topics, including:</p>
+                    <ul>
+                        <li>Network security: This section of the course covers topics such as firewalls, intrusion detection systems, and network monitoring.</li>
+                        <li>Ethical hacking: This section of the course covers topics such as penetration testing, vulnerability assessment, and social engineering.</li>
+                        <li>Digital forensics: This section of the course covers topics such as data recovery, evidence collection, and chain of custody.</li>
+                    </ul>
+                    <p>The IFF cyber security course is taught by experienced cyber security professionals. The course is offered both online and in person.</p>
+                    <p>The recruitment process for the IFF cyber security course is competitive. Applicants must have a bachelor's degree in computer science or a related field. Applicants must also have experience in cyber security or a related field.</p>
+                    <p>The skills required for a successful career in cyber security include:</p>
+                    <ul>
+                        <li>Technical skills: Cyber security professionals must have strong technical skills, including knowledge of networking, operating systems, and programming languages.</li>
+                        <li>Analytical skills: Cyber security professionals must be able to analyze data and identify patterns.</li>
+                        <li>Problem-solving skills: Cyber security professionals must be able to solve complex problems.</li>
+                        <li>Communication skills: Cyber security professionals must be able to communicate effectively with both technical and non-technical audiences.</li>
+                    </ul>
+                    <p>The opportunities for cyber security professionals are growing. Cyber security professionals are in high demand in a variety of industries, including government, finance, and healthcare. Cyber security professionals can earn a good salary and have a rewarding career.</p>
+                    <p>Here are some of the opportunities that are available to cyber security professionals:</p>
+                    <ul>
+                        <li>Security analyst</li>
+                        <li>Security engineer</li>
+                        <li>Security architect</li>
+                        <li>Chief information security officer (CISO)</li>
+                        <li>Penetration tester</li>
+                        <li>Vulnerability researcher</li>
+                        <li>Digital forensic analyst</li>
+                        <li>Incident responder</li>
+                        <li>Cyber security consultant</li>
+                    </ul>
+                    <p>If you are interested in a career in cyber security, the IFF cyber security course is a great way to get started. The course will give you the skills you need to enter a rewarding and in-demand field.</p>
+                </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="Cyberops">Cyberops Infosec LLP</span>
+              <div id="Cyberops" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><h1>Cyberops Infosec LLP Cyber Security Course</h1>
+                    <p>Cyberops Infosec LLP is a leading cyber security company in India. They offer various products and services in the field of cyber security and information security. Cyberops Infosec LLP also offers certified training on Information Security.</p>
+                    <p>The cyber security course offered by Cyberops Infosec LLP is designed to help participants understand the security terminology, design, implement, and support networked security technologies, including anti-malware, firewalls, and intrusion detection systems. The course also covers in-depth concepts of cryptography, exploitation techniques and capabilities for penetration testing, methods to conduct investigations to correctly gather analyze and present digital evidence to both business and legal audiences.</p>
+                    <p>The cyber security course offered by Cyberops Infosec LLP is a part-time course. The course is open to all those who are interested in a career in cyber security. The course is conducted by experienced and qualified faculty members. The course material is up-to-date and covers the latest trends and developments in the field of cyber security.</p>
+                    <p>The recruitment process for the cyber security course offered by Cyberops Infosec LLP is simple. The candidates need to fill up an online application form and submit it along with their resume. The shortlisted candidates will be called for an interview. The selection of the candidates will be based on their performance in the interview and their academic qualifications.</p>
+                    <p>The skills required for a successful career in cyber security include intrusion detection, malware analysis and reversing, programming know-how, thinking like black-hat, building a well-rounded skill, risk analysis and mitigation, cloud security, and security analysis.</p>
+                    <p>The opportunities for a successful career in cyber security are immense. The demand for cyber security professionals is growing rapidly as businesses are increasingly realizing the importance of cyber security. Cyber security professionals can find jobs in a variety of industries, including IT, finance, healthcare, and government. They can also work as consultants or freelancers.</p>
+                    <p>The salary of a cyber security professional depends on their experience, skills, and qualifications. Entry-level cyber security professionals can expect to earn a salary of around INR 3-4 lakhs per annum. Experienced cyber security professionals can earn a salary of around INR 10-15 lakhs per annum.</p>
+                    <p>In conclusion, the cyber security course offered by Cyberops Infosec LLP is a great option for those who are interested in a career in cyber security. The course is well-designed and covers the latest trends and developments in the field of cyber security. The faculty members are experienced and qualified. The recruitment process is simple and straightforward. The opportunities for a successful career in cyber security are immense.</p>
+                </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="Hicube">Hicube Infosec</span>
+              <div id="Hicube" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p> <h1>Hicube Infosec Cybersecurity Courses</h1>
+                    <p>Hicube Infosec offers a variety of cybersecurity courses, including the Hicube Infosec Analyst and Hicube Infosec Specialist courses. These courses are designed to provide students with the skills and knowledge they need to succeed in a career in cybersecurity.</p>
+                    <h2>Hicube Infosec Analyst Course</h2>
+                    <p>The Hicube Infosec Analyst course covers a wide range of topics, including basic security concepts, principles, and key terms. Students will also learn about advanced search techniques and cyber invasion methods. The course is designed for beginners and provides a complete knowledge of the cyber world.</p>
+                    <h2>Hicube Infosec Specialist Course</h2>
+                    <p>The Hicube Infosec Specialist course is designed for students with a background in computer engineering, BCA/MCA, information security, web development, or law enforcement. The course covers a variety of topics, including information security, incident response strategies, and government IT sector security.</p>
+                    <h2>Recruitment Process</h2>
+                    <p>The recruitment process for the Hicube Infosec courses is relatively straightforward. Students must first submit an application form and then complete an interview. The interview will assess the student's skills and knowledge, as well as their motivation for pursuing a career in cybersecurity.</p>
+                    <h2>Skills Required</h2>
+                    <p>The skills required for a successful career in cybersecurity include problem-solving skills, technical aptitude, knowledge of security across various platforms, attention to detail, communication skills, fundamental computer forensics skills, a desire to learn, and an understanding of hacking.</p>
+                    <h2>Opportunities</h2>
+                    <p>The opportunities for a career in cybersecurity are vast and growing. Cybersecurity professionals are in high demand in a variety of industries, including government, healthcare, finance, and technology. Some of the most common cybersecurity jobs include security analyst, security engineer, security architect, and chief information security officer.</p>
+                    <p>Overall, the Hicube Infosec courses are a great way to learn the skills and knowledge you need to succeed in a career in cybersecurity. The courses are well-designed and cover a wide range of topics. The recruitment process is relatively straightforward, and the opportunities for a career in cybersecurity are vast and growing.</p>
+                </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="Positive">Positive Software Pvt Ltd</span>
+              <div id="Positive" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><h2>Positive Software Pvt Ltd Cyber Security Information</h2>
+                    <p>
+                      Positive Software Pvt Ltd is a leading IT company that provides cyber security solutions to businesses of all sizes. The company offers a variety of cyber security courses, including a cyber security analyst course, a cyber security engineer course, and a cyber security architect course.
+                    </p>
+                    <p>
+                      The recruitment process for the cyber security courses at Positive Software Pvt Ltd is as follows:
+                      <ul>
+                        <li>The candidate must have a bachelor's degree in computer science, information technology, or a related field.</li>
+                        <li>The candidate must have a strong understanding of cyber security concepts and principles.</li>
+                        <li>The candidate must have experience with cyber security tools and technologies.</li>
+                        <li>The candidate must be able to think critically and solve problems effectively.</li>
+                        <li>The candidate must be able to work independently and as part of a team.</li>
+                      </ul>
+                    </p>
+                    <p>
+                      The skills required for a successful career in cyber security include:
+                      <ul>
+                        <li>Technical skills, such as networking, system administration, coding, network security control, risk analysis, and security audit.</li>
+                        <li>Soft skills, such as problem-solving, adaptability, communication skills, and attention to detail.</li>
+                      </ul>
+                    </p>
+                    <p>
+                      Opportunities for cyber security professionals are growing rapidly. According to the Bureau of Labor Statistics, the employment of information security analysts is projected to grow 33% from 2020 to 2030, much faster than the average for all occupations.
+                    </p>
+                    <p>
+                      Cyber security professionals can find jobs in a variety of industries, including: Financial services, Healthcare, Government, Technology, Education, and Manufacturing.
+                    </p>
+                    <p>
+                      The average salary for a cyber security professional in the United States is $103,590 per year.
+                    </p>
+                    <p>
+                      Positive Software Pvt Ltd offers a variety of benefits to its employees, including: Competitive salaries, Health insurance, Dental insurance, Vision insurance, 401(k) plan, Paid time off, Tuition reimbursement.
+                    </p>
+                    <p>
+                      If you are interested in a career in cyber security, Positive Software Pvt Ltd is a great place to start. The company offers a variety of courses that will teach you the skills you need to be successful in this field.
+                    </p>
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="K7">K7 Computing Pvt. Ltd.</span>
+              <div id="K7" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><h2>K7 Computing Pvt. Ltd. Cyber Security Courses</h2>
+                    <p>
+                      K7 Computing Pvt. Ltd. is a leading provider of cyber security solutions in India. The company offers a wide range of cyber security courses, including a cyber security analyst course, a cyber security engineer course, and a cyber security management course.
+                    </p>
+                    <p>
+                      The recruitment process for the cyber security courses at K7 Computing Pvt. Ltd. is as follows:
+                      <ul>
+                        <li>The candidate must have a bachelor's degree in computer science or a related field.</li>
+                        <li>The candidate must have at least 2 years of experience in the cyber security field.</li>
+                        <li>The candidate must have a strong understanding of cyber security concepts and technologies.</li>
+                        <li>The candidate must be able to think critically and solve problems effectively.</li>
+                        <li>The candidate must be able to work independently and as part of a team.</li>
+                      </ul>
+                    </p>
+                    <p>
+                      The skills required for a successful career in cyber security include:
+                      <ul>
+                        <li>Technical skills: The candidate must have a strong understanding of cyber security concepts and technologies. This includes knowledge of operating systems, networking, and security protocols.</li>
+                        <li>Analytical skills: The candidate must be able to think critically and solve problems effectively. This includes the ability to identify and assess cyber security risks, and to develop and implement security solutions.</li>
+                        <li>Communication skills: The candidate must be able to communicate effectively with both technical and non-technical audiences. This includes the ability to write clear and concise reports, and to give presentations on cyber security topics.</li>
+                      </ul>
+                    </p>
+                    <p>
+                      The opportunities for a career in cyber security are vast and growing. Cyber security professionals are in high demand in a variety of industries, including government, healthcare, finance, and technology. The average salary for a cyber security professional in India is Rs. 7 lakhs per annum.
+                    </p>
+                    <p>
+                      Here are some of the job opportunities that are available to cyber security professionals:
+                      <ul>
+                        <li>Cyber security analyst: Cyber security analysts are responsible for monitoring and analyzing cyber security threats. They also develop and implement security solutions to protect organizations from cyber attacks.</li>
+                        <li>Cyber security engineer: Cyber security engineers are responsible for designing and implementing cyber security solutions. They also work to improve the security of existing systems and networks.</li>
+                        <li>Cyber security manager: Cyber security managers are responsible for overseeing the cyber security operations of an organization. They develop and implement security policies and procedures, and they manage the cyber security team.</li>
+                      </ul>
+                    </p>
+                    <p>
+                      If you are interested in a career in cyber security, the cyber security courses offered by K7 Computing Pvt. Ltd. can help you to develop the skills and knowledge that you need to be successful.
+                    </p>
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="QuickHeal">Quick Heal Technologies Ltd</span>
+              <div id="QuickHeal" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p> <h2>Quick Heal Technologies Ltd. Careers in Cybersecurity</h2>
+                    <p>
+                      Quick Heal Technologies Ltd. is an IT security solutions company that offers a variety of courses on cybersecurity. These courses are designed to help individuals and organizations learn more about cybersecurity and how to protect themselves from cyber threats.
+                    </p>
+                    <p>
+                      The recruitment process for Quick Heal Technologies Ltd. is quite straightforward. The first step is to apply for a position online. Once your application has been reviewed, you will be contacted by a recruiter if you are a good fit for the position. The recruiter will then schedule an interview with you. During the interview, you will be asked questions about your skills and experience, as well as your reasons for wanting to work at Quick Heal Technologies Ltd.
+                    </p>
+                    <p>
+                      After the interview, the recruiter will make a recommendation to the hiring manager. If the hiring manager approves your recommendation, you will be offered a position. Once you have accepted the position, you will be required to complete a background check and drug test.
+                    </p>
+                    <p>
+                      The skills required for a position at Quick Heal Technologies Ltd. vary depending on the position you are applying for. However, some general skills that are required for all positions include strong analytical and problem-solving skills, as well as the ability to work independently and as part of a team.
+                    </p>
+                    <p>
+                      There are many opportunities available at Quick Heal Technologies Ltd. for individuals who are interested in cybersecurity. The company offers a variety of positions, including software engineers, security analysts, and penetration testers. Quick Heal Technologies Ltd. also offers a variety of training and development programs to help employees grow their skills and advance their careers.
+                    </p>
+                    <p>
+                      If you are interested in a career in cybersecurity, Quick Heal Technologies Ltd. is a great place to start. The company offers a variety of courses and training programs that can help you learn more about cybersecurity and how to protect yourself from cyber threats. Quick Heal Technologies Ltd. also offers a variety of positions for individuals who are interested in a career in cybersecurity.
+                    </p>
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="VP">The VP Techno Labs International</span>
+              <div id="VP" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p>  <h2>VP Techno Labs International Cybersecurity Courses</h2>
+                    <p>
+                      VP Techno Labs International is an award-winning and internationally recognized cyber-security company with more than 300 clients across the globe. The company offers a variety of cyber security courses, including a cyber security analyst course, a cyber security engineer course, and a cyber security architect course.
+                    </p>
+                    <p>
+                      The recruitment process for the cyber security courses at VP Techno Labs International is as follows:
+                    </p>
+                    <ol>
+                      <li>The candidate must submit a resume and cover letter to the company.</li>
+                      <li>If the candidate's resume and cover letter are shortlisted, they will be invited for an interview.</li>
+                      <li>The interview will assess the candidate's technical skills, knowledge of cyber security, and problem-solving abilities.</li>
+                      <li>If the candidate is successful in the interview, they will be offered a place on the course.</li>
+                    </ol>
+                    <p>
+                      The skills required for a career in cyber security include:
+                    </p>
+                    <ul>
+                      <li>A strong understanding of networking, operating systems, and programming languages.</li>
+                      <li>The ability to identify and assess vulnerabilities in computer systems.</li>
+                      <li>The ability to develop and implement security solutions.</li>
+                      <li>The ability to monitor and respond to security incidents.</li>
+                      <li>Strong analytical and problem-solving skills.</li>
+                      <li>The ability to work independently and as part of a team.</li>
+                    </ul>
+                    <p>
+                      The opportunities for a career in cyber security are vast and growing. Cyber security professionals are in high demand in a variety of industries, including government, finance, healthcare, and technology.
+                    </p>
+                    <p>
+                      The VP Techno Labs International cyber security courses are designed to provide students with the skills and knowledge they need to be successful in a career in cyber security. The courses are taught by experienced cyber security professionals and cover a wide range of topics, including network security, operating system security, application security, cryptography, incident response, and risk management.
+                    </p>
+                    <p>
+                      The VP Techno Labs International cyber security courses are also accredited by a number of industry-leading organizations, including the EC-Council and the Information Systems Security Association (ISSA). This means that students who complete the courses will be recognized as having the skills and knowledge required to work in the cyber security field.
+                    </p>
+                    <p>
+                      If you are interested in a career in cyber security, the VP Techno Labs International cyber security courses are a great way to get started. The courses are well-designed and taught by experienced professionals, and they will give you the skills and knowledge you need to be successful in the field.
+                    </p>
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="WiJungle">Wi-Jungle</span>
+              <div id="WiJungle" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p> <h2>Wi-Jungle Cybersecurity Course</h2>
+                    <p>
+                      Wi-Jungle is a cyber security company that offers a variety of courses, including a cyber security course. The course is designed to teach students the skills they need to work in the cyber security field. The course covers a variety of topics, including network security, system security, application security, cryptography, ethical hacking, and risk management.
+                    </p>
+                    <p>
+                      The course is offered in both online and offline formats. The online course is self-paced and can be completed at your own pace. The offline course is instructor-led and is offered at Wi-Jungle's training centers in India.
+                    </p>
+                    <p>
+                      The recruitment process for the cyber security course is as follows:
+                    </p>
+                    <ol>
+                      <li>You will need to submit an application form.</li>
+                      <li>You will be interviewed by a Wi-Jungle representative.</li>
+                      <li>If you are selected, you will be offered a place in the course.</li>
+                    </ol>
+                    <p>
+                      The skills required for the cyber security course are:
+                    </p>
+                    <ul>
+                      <li>A bachelor's degree in computer science, information security, or a related field.</li>
+                      <li>Experience with networking, system administration, and security.</li>
+                      <li>Strong analytical and problem-solving skills.</li>
+                      <li>The ability to work independently and as part of a team.</li>
+                    </ul>
+                    <p>
+                      The opportunities for cyber security professionals are growing rapidly. The demand for cyber security professionals is expected to grow by 33% from 2020 to 2030. Cyber security professionals can work in a variety of industries, including government, finance, healthcare, technology, and education. The average salary for a cyber security professional in the United States is $103,590 per year. The salary for a cyber security professional can vary depending on experience, skills, and location.
+                    </p>
+                    <p>
+                      If you are interested in a career in cyber security, the Wi-Jungle cyber security course is a great way to get started. The course will teach you the skills you need to work in the cyber security field and help you prepare for a successful career.
+                    </p>
+                    <p>
+                      Here are some additional details about the Wi-Jungle cyber security course:
+                    </p>
+                    <ul>
+                      <li>The course is offered in both English and Hindi.</li>
+                      <li>The course is taught by experienced cyber security professionals.</li>
+                      <li>The course provides hands-on experience with cyber security tools and techniques.</li>
+                      <li>The course offers placement assistance to students who successfully complete the course.</li>
+                    </ul>
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="HikeQA">Hike QA</span>
+              <div id="HikeQA" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><h2>HikeQA Cybersecurity Course</h2>
+                    <p>
+                      HikeQA is a QA and Software Testing Service Company in India. They offer a variety of services, including cyber security training.
+                    </p>
+                    <p>
+                      The recruitment process for the cyber security course is as follows:
+                    </p>
+                    <ul>
+                      <li>The candidate must have a bachelor's degree in computer science or a related field.</li>
+                      <li>The candidate must have at least two years of experience in the IT industry.</li>
+                      <li>The candidate must have a strong understanding of cyber security concepts.</li>
+                      <li>The candidate must be able to pass a written test and an interview.</li>
+                    </ul>
+                    <p>
+                      The skills required for the cyber security course are as follows:
+                    </p>
+                    <ul>
+                      <li>Knowledge of operating systems</li>
+                      <li>Knowledge of programming languages</li>
+                      <li>Knowledge of networking fundamentals</li>
+                      <li>Knowledge of applications and systems</li>
+                      <li>Knowledge of security concepts</li>
+                      <li>Knowledge of security incident handling and response</li>
+                      <li>Knowledge of security across various platforms</li>
+                      <li>Knowledge of mobile device management</li>
+                      <li>Knowledge of penetration testing</li>
+                    </ul>
+                    <p>
+                      The opportunities for cyber security professionals are vast. They can work in a variety of industries, including financial services, healthcare, government, technology, and education. Cyber security professionals are in high demand, and the job outlook is expected to grow much faster than average in the coming years.
+                    </p>
+                    <p>
+                      Here are some of the popular cybersecurity certifications:
+                    </p>
+                    <ul>
+                      <li>Certified Information Systems Security Professional (CISSP)</li>
+                      <li>Certified Ethical Hacker (CEH)</li>
+                      <li>Certified Information Security Manager (CISM)</li>
+                      <li>CompTIA Security+</li>
+                      <li>Offensive Security Certified Professional (OSCP)</li>
+                      <li>Certified Cloud Security Professional (CCSP)</li>
+                      <li>Certified Information Systems Auditor (CISA)</li>
+                      <li>GIAC Security Essentials (GSEC)</li>
+                      <li>Certified Secure Software Lifecycle Professional (CSSLP)</li>
+                      <li>Certified Incident Handler (GCIH)</li>
+                    </ul>
+                    <p>
+                      If you are interested in a career in cyber security, the HikeQA cyber security course is a great way to get started. The course will provide you with the skills and knowledge you need to succeed in this exciting field.
+                    </p>
+                  </p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </section>
+      
+
+        <section id="top-personalities" class="astro-section bg-light">
+          <h2>Top Personalities in Indian Cybersecurity</h2>
+          <p>Marvel at the cosmic luminaries illuminating the universe of cybersecurity in India. Behold the stellar personalities such as:</p>
+          <ul>
+            <li>
+              <span class="info" data-modal="Ramayya">Ramayya Yadava, CEO of Zeus InfoSec</span>
+              <div id="Ramayya" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p>
+                    <header>
+                      <h1>Ramayya Yadav</h1>
+                      <p>Cybersecurity Leader</p>
+                  </header>
+                  <main>
+                      <section>
+                          <h2>About Ramayya Yadav</h2>
+                          <p>Ramayya Yadav is the CEO of Zeus InfoSec, a leading cybersecurity firm. He is a visionary leader and a highly respected expert in the field of cybersecurity. With over 20 years of experience in the industry, he has a deep understanding of the latest threats and trends.</p>
+                          <p>He is passionate about protecting businesses and individuals from cyberattacks, and he is committed to providing his clients with the best possible security solutions.</p>
+                      </section>
+                      <section>
+                          <h2>Accomplishments</h2>
+                          <ul>
+                              <li>CEO of Zeus InfoSec</li>
+                              <li>Over 20 years of experience in the cybersecurity industry</li>
+                              <li>Frequent speaker at industry events</li>
+                              <li>Regularly writes articles and blog posts on cybersecurity topics</li>
+                              <li>Strong advocate for cybersecurity awareness and education</li>
+                              <li>Mentor to many of his employees</li>
+                          </ul>
+                      </section>
+                  </main>
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="Sanjay">Sanjay Bhatia, Managing Director of Dell Technologies India</span>
+              <div id="Sanjay" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><header>
+                    <h1>About Sanjay Bhatia</h1>
+                    <p>Managing Director of Dell Technologies India</p>
+                </header>
+                <main>
+                    <section>
+                        <h2>Background</h2>
+                        <p>Sanjay Bhatia is the Managing Director of Dell Technologies India. Unfortunately, there is limited publicly available information about his specific background and accomplishments.</p>
+                    </section>
+                    <section>
+                        <h2>Dell Technologies</h2>
+                        <p>Dell Technologies is a multinational computer technology company that develops, sells, repairs, and supports a wide variety of electronic devices, from personal computers and servers to networking devices and software. The company is headquartered in Round Rock, Texas, United States.</p>
+                        <p>For more information about Dell Technologies, visit the official website: <a href="https://www.dell.com/">https://www.dell.com/</a></p>
+                    </section>
+                </main></p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="Gulshan">Gulshan Rai, Director of Palo Alto Networks India and SAARC</span>
+              <div id="Gulshan" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><header>
+                    <h1>About Dr. Gulshan Rai</h1>
+                    <p>Director of Palo Alto Networks India and SAARC</p>
+                </header>
+                <main>
+                    <section>
+                        <h2>Background</h2>
+                        <p>Dr. Gulshan Rai is a renowned information technology expert with over 30 years of experience in the field. He currently serves as the Director of Palo Alto Networks India and SAARC.</p>
+                    </section>
+                    <section>
+                        <h2>Previous Roles</h2>
+                        <p>Prior to his current role, Dr. Rai served as India's first cybersecurity chief, a position appointed by the prime minister in 2015. He also served as the director general of the Indian Computer Emergency Response Team (CERT-In), an office in the Ministry of Electronics and Information Technology.</p>
+                    </section>
+                    <section>
+                        <h2>Contributions</h2>
+                        <p>Dr. Rai has a deep understanding of the cybersecurity sector and has played a key role in developing India's cybersecurity policies and frameworks. He has represented India in various international forums on cybersecurity and internet governance.</p>
+                    </section>
+                    <section>
+                        <h2>Recognition</h2>
+                        <p>Dr. Rai is a Distinguished Fellow at the Observer Research Foundation (ORF) and serves on the board of directors of several companies. He is highly respected in the cybersecurity community for his expertise, integrity, and commitment to public service.</p>
+                    </section>
+                </main></p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="Rekha">Rekha Jain, Chief Product Officer of CyberPeace</span>
+              <div id="Rekha" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><header>
+                    <h1>About Rekha Jain, Chief Product Officer at CyberPeace</h1>
+                </header>
+                <main>
+                    <section>
+                        <h2>Background and Achievements</h2>
+                        <p>Rekha Jain is the Chief Product Officer at CyberPeace, a company likely focused on cybersecurity solutions based on the name. Unfortunately, details about her background and achievements are currently unavailable due to Rekha Jain or CyberPeace potentially maintaining a low online presence.</p>
+                    </section>
+                </main></p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="Venu">Venu Gopal, Vice President and Head of Security Services at Wipro</span>
+              <div id="Venu" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><header>
+                    <h1>About Venu Gopal</h1>
+                </header>
+                <main>
+                    <section>
+                        <h2>Background and Role at Wipro</h2>
+                        <p>Venu Gopal is a seasoned security professional with over 20 years of experience in the industry. He is currently the Vice President and Head of Security Services at Wipro. In this role, he leads the company's global security services practice, develops and executes security strategies, and manages a team of security professionals.</p>
+                    </section>
+                    <section>
+                        <h2>Notable Achievements</h2>
+                        <ul>
+                            <li>Led the development and implementation of Wipro's security strategy, reducing the company's risk of security incidents.</li>
+                            <li>Managed a team of security professionals who successfully responded to and resolved several security incidents.</li>
+                            <li>Delivered security services to Wipro's clients, improving their security posture.</li>
+                            <li>Spoken at industry events and published several articles on security topics, raising awareness of security issues.</li>
+                            <li>Member of industry organizations, including the Information Systems Security Association (ISSA) and the Cloud Security Alliance (CSA), promoting collaboration and information sharing among security professionals.</li>
+                        </ul>
+                    </section>
+                </main>
+                </p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        
+          <h3>Other top cybersecurity experts in India:</h3>
+          <ul>
+            <li>
+              <span class="info" data-modal="Nitin">Nitin Pandey</span>
+              <div id="Nitin" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><header>
+                    <h1>About Nitin Pandey</h1>
+                </header>
+                <main>
+                    <section>
+                        <h2>Background and Role</h2>
+                        <p>Nitin Pandey is the Founder & CEO of parentune.com, the most rapidly growing parents community website & mobile app in India. He started his career as a trainee fresh out of his MBA and had an adventurous career leading several change and scale initiatives at some of the leading MNCs. His tryst with the education sector got him to discover his passion in supporting parents to do more for their child.</p>
+                    </section>
+                    <section>
+                        <h2>Mission and Vision</h2>
+                        <p>He enjoys his hustle with his teammates at parentune.com & believes that a community helpline to support parents; parentune shall bring in a positive shift in each child’s development.</p>
+                    </section>
+                </main></p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="Ranjeet">Dr. Ranjeet Kumar Singh</span>
+              <div id="Ranjeet" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><header>
+                    <h1>About Dr. Ranjeet Kumar Singh</h1>
+                </header>
+                <main>
+                    <section>
+                        <h2>Background</h2>
+                        <p>Dr. Ranjeet Kumar Singh is an Indian Administrative Service (IAS) officer and the current Director of the Panchayati Raj Department in the Bihar Government. He is a well-known figure in the field of public administration and has over 14 years of experience in the government sector.</p>
+                        <p>Dr. Singh was born in the village of Fatikwara in the Vaishali district of Bihar. He completed his primary and secondary education at local schools and went on to study political science at Patna University. After graduating with a bachelor's degree, he pursued a master's degree in public administration from the same university.</p>
+                    </section>
+                    <section>
+                        <h2>Career</h2>
+                        <p>In 2008, Dr. Singh cleared the UPSC Civil Services Examination and was selected for the IAS. He was initially posted to the Gujarat cadre, where he served as the Area Magistrate for the Narmada district. In 2014, Dr. Singh was transferred to the Bihar cadre, where he has held several important positions in the state government, including the Principal Secretary of the Department of Education and the Secretary of the Department of Rural Development.</p>
+                        <p>In his current role as the Director of the Panchayati Raj Department, Dr. Singh is responsible for overseeing the implementation of various schemes and programs aimed at the development of rural areas in Bihar. He is also actively involved in promoting good governance and transparency in the functioning of the Panchayati Raj institutions.</p>
+                    </section>
+                    <section>
+                        <h2>Awards and Social Initiatives</h2>
+                        <p>Dr. Singh is a recipient of several awards and accolades for his outstanding work in the field of public administration. He is also a motivational speaker and has delivered lectures at various educational institutions and forums.</p>
+                        <p>In addition to his professional accomplishments, Dr. Singh is also a passionate advocate for social causes. He is the founder of the educational institute "Mission 50 IAS," which provides free coaching to underprivileged students to help them prepare for the UPSC Civil Services Examination.</p>
+                    </section>
+                </main></p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="Shivam">Shivam Kumar Singh</span>
+              <div id="Shivam" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><header>
+                    <h1>About Shivam Kumar Singh</h1>
+                </header>
+                <main>
+                    <section>
+                        <h2>Background</h2>
+                        <p>Shivam Kumar Singh is a renowned cybersecurity researcher, bug bounty hunter, entrepreneur, and director of Team Hash Foundation, an NGO. He is dedicated to using his expertise to protect individuals and businesses from cyber threats.</p>
+                    </section>
+                    <section>
+                        <h2>Experience and Achievements</h2>
+                        <ul>
+                            <li>Discovered a critical vulnerability in the Microsoft Edge browser in 2021, which could have allowed attackers to take over any company or user by sending a message.</li>
+                            <li>Built an automated solution for stress testing of refreshable Braille displays.</li>
+                            <li>Created a dataset of over 12,000 pictures of RBDs in different configurations.</li>
+                            <li>Implemented a CNN model to automate testing of an RBD cell.</li>
+                            <li>Director of Team Hash Foundation, an NGO that works to promote cybersecurity awareness and education.</li>
+                        </ul>
+                    </section>
+                </main></p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="Sriram">Sriram</span>
+              <div id="Sriram" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><header>
+                    <h1>About Sriram Cyber Security</h1>
+                </header>
+                <main>
+                    <section>
+                        <h2>Overview</h2>
+                        <p>Sriram Cyber Security is a cyber security company based in Chennai, India. Founded in 2018 by Sriram, a cyber security researcher with over 10 years of experience, the company provides various cyber security services to businesses, including risk assessment, security audits, penetration testing, and incident response.</p>
+                    </section>
+                    <section>
+                        <h2>Key Features</h2>
+                        <ul>
+                            <li>Experienced and certified cyber security professionals</li>
+                            <li>Use of the latest tools and techniques</li>
+                            <li>Proven track record of success</li>
+                            <li>Commitment to helping businesses protect their data and systems</li>
+                        </ul>
+                    </section>
+                </main></p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="Pratik">Pratik Dabhi</span>
+              <div id="Pratik" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><header>
+                    <h1>About Pratik Dabhi - Cyber Security Professional</h1>
+                </header>
+                <main>
+                    <section>
+                        <h2>Overview</h2>
+                        <p>Pratik Dabhi is a renowned cyber security professional, bug bounty hunter, YouTuber, and influencer in the cyber security domain. Born on December 10, 1996, in Ahmedabad, Gujarat, he has helped many multinational companies secure their data from bad actors. He has also been listed in "Bugcrowd Top 250 Hackers Globally" and "Yeswehack Top 50 Hackers Globally".</p>
+                    </section>
+                    <section>
+                        <h2>Experience and Achievements</h2>
+                        <ul>
+                            <li>Worked with companies like Apple, Microsoft, Google, Blackberry, Mastercard, Redhat, Disney (Hotstar), and Dell.</li>
+                            <li>Selected as one of the top 20 hackers to represent GISEC Global live hacking event in Dubai.</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Skills</h2>
+                        <p>Experienced with tools like Burp Suite, Acunetix, Nessus, IBM AppScan, Nmap, Pentest tools, Frida, Drozer, Kali Linux, and GitHub open source tools like Amass, Aquatone, and more. Uses these tools to find vulnerabilities in web and mobile applications.</p>
+                    </section>
+                    <section>
+                        <h2>Advocacy and Education</h2>
+                        <p>Passionate advocate for cyber security awareness and education. Regularly speaks at conferences and events about cyber security topics. Manages a YouTube channel to share knowledge and expertise with others.</p>
+                    </section>
+                </main></p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="Yassir">Yasir Arafat Shaikh</span>
+              <div id="Yassir" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><header>
+                    <h1>About Shaikh Yasir Arafat - Cyber Security Researcher and Trainer</h1>
+                </header>
+                <main>
+                    <section>
+                        <h2>Overview</h2>
+                        <p>Shaikh Yasir Arafat is a cyber security researcher and trainer from Mumbai, India. He is the founder and CTO of Macksofy Technologies Pvt Ltd. With over 13 years of experience in the IT industry, he is highly decorated and respected in the field.</p>
+                    </section>
+                    <section>
+                        <h2>Achievements</h2>
+                        <ul>
+                            <li>Recognized as the Best Cyber Security Trainer in 2018</li>
+                            <li>Two-time recipient of the Global Cyber Security Professional Award</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Public Speaking and Authorship</h2>
+                        <p>Regular speaker at cyber security conferences and events. Author of several articles on cyber security.</p>
+                    </section>
+                    <section>
+                        <h2>Advocacy</h2>
+                        <p>Passionate advocate for cyber security awareness and education. Believes that everyone should have the knowledge and skills to protect themselves from cyber attacks.</p>
+                    </section>
+                </main></p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="Vansh">Vansh Devgan</span>
+              <div id="Vansh" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p>Not a lot information found he is mentaning loprofile for soo long</p>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <span class="info" data-modal="Satish">Sai Satish</span>
+              <div id="Satish" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><header>
+                    <h1>About Sai Satish - Entrepreneur, Ethical Hacker, and Cyber Security Expert</h1>
+                </header>
+                <main>
+                    <section>
+                        <h2>Overview</h2>
+                        <p>Sai Satish is a young entrepreneur, founder, and CEO of Indian Servers. He is also the administrator of Andhrahackers, a top hacking awareness forum in India. With a background as a renowned ethical hacker and cyber security expert, Sai Satish has made significant contributions to cyber security education and awareness in India and beyond.</p>
+                    </section>
+                    <section>
+                        <h2>Achievements</h2>
+                        <ul>
+                            <li>Renowned Ethical Hacker & Cyber Security Expert</li>
+                            <li>Microsoft Security Researcher</li>
+                            <li>International Cyber Security Trainer</li>
+                            <li>Recognized for delivering lectures at 100+ colleges worldwide, benefiting thousands of college students and professionals</li>
+                            <li>Worked as a Microsoft Student Partner and Corporate .NET Trainer</li>
+                            <li>Interviewed by numerous international, national, and regional news channels</li>
+                            <li>Rewarded by IAS officers for pentesting on government sites, contributing to improved security and safe transactions</li>
+                            <li>Regular speaker at CSI events</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Goals</h2>
+                        <ol>
+                            <li>Developing resources in Humans of India</li>
+                            <li>Enhancing quality in teaching & training in India</li>
+                            <li>Interlinking of Rivers in India</li>
+                            <li>Desalination of sea water</li>
+                        </ol>
+                    </section>
+                </main</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <p>These celestial beings inspire and guide cosmic aspirants, paving the way for a brighter future in the cosmic realm of cybersecurity.</p>
+        </section>
+
+        <section id="job-roles" class="astro-section bg-light">
+          <h2>Job Roles for Cyber Security in India</h2>
+          <p>Embark on a cosmic odyssey of career opportunities in the vast expanse of cybersecurity. Explore cosmic job roles such as:</p>
+          <ul>
+            <li>
+              <span class="info" data-modal="SA">Security Analyst</span>
+              <div id="SA" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><header>
+                    <h1>Job Duties of a Security Analyst</h1>
+                </header>
+                <main>
+                    <section>
+                        <h2>Overview</h2>
+                        <p>A security analyst is responsible for protecting an organization's computer networks and information systems from cyber threats. They perform various tasks to identify, assess, and mitigate security risks, as well as educate users about security best practices.</p>
+                    </section>
+                    <section>
+                        <h2>Common Job Duties</h2>
+                        <ul>
+                            <li>Identifying and assessing security risks using tools and techniques like vulnerability scanning, penetration testing, and risk analysis.</li>
+                            <li>Mitigating security risks by implementing security controls such as firewalls, intrusion detection systems, and access control systems.</li>
+                            <li>Monitoring security systems to detect and respond to security incidents.</li>
+                            <li>Investigating security incidents to determine their cause and scope, and working to contain and prevent them from happening again.</li>
+                            <li>Educating users about security best practices to help them protect themselves and the organization from cyber threats.</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Additional Responsibilities</h2>
+                        <ul>
+                            <li>Developing and implementing security policies and procedures.</li>
+                            <li>Training employees on security awareness.</li>
+                            <li>Managing security budgets.</li>
+                            <li>Keeping up to date on the latest security threats and trends.</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Work Environment and Outlook</h2>
+                        <p>Security analysts typically work in an office environment but may also be required to work on-call or travel to different locations. The job outlook for security analysts is expected to grow much faster than average over the next decade due to increasing reliance on computer networks and information systems.</p>
+                    </section>
+                </main></p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="SE">Security Engineer</span>
+              <div id="SE" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><header>
+                    <h1>Job Description of a Security Engineer</h1>
+                </header>
+                <main>
+                    <section>
+                        <h2>Overview</h2>
+                        <p>Security engineers are responsible for designing, implementing, and maintaining the security of computer systems and networks to protect organizations from cyber attacks, data loss, and unauthorized access.</p>
+                    </section>
+                    <section>
+                        <h2>Specific Duties</h2>
+                        <ul>
+                            <li>Conduct security assessments and risk analyses to identify vulnerabilities in systems and networks.</li>
+                            <li>Design and implement security controls, such as firewalls, intrusion detection systems, and access control lists.</li>
+                            <li>Monitor systems and networks for security breaches and incidents.</li>
+                            <li>Respond to security incidents and take steps to mitigate the damage.</li>
+                            <li>Develop and implement security policies and procedures.</li>
+                            <li>Educate staff on security best practices.</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Qualifications and Preparation</h2>
+                        <p>Security engineers typically have a bachelor's degree in computer science or a related field, along with experience working in information technology. Additionally, they can take security courses and certifications to demonstrate their knowledge and skills.</p>
+                    </section>
+                    <section>
+                        <h2>Career Outlook</h2>
+                        <p>Security engineering is a challenging but rewarding career, offering the opportunity to work on cutting-edge technologies and play a vital role in protecting organizations from cyber attacks.</p>
+                    </section>
+                </main></p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="PT">Penetration Tester</span>
+              <div id="PT" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><header>
+                    <h1>Job Description of a Penetration Tester</h1>
+                </header>
+                <main>
+                    <section>
+                        <h2>Overview</h2>
+                        <p>Penetration testers, also known as pen testers or ethical hackers, are cybersecurity professionals responsible for identifying and exploiting vulnerabilities in computer systems, networks, and applications to improve security.</p>
+                    </section>
+                    <section>
+                        <h2>Key Responsibilities</h2>
+                        <ul>
+                            <li>Conduct regular audits and inspections to identify vulnerabilities.</li>
+                            <li>Use various techniques like social engineering, network scanning, and vulnerability scanning to exploit vulnerabilities.</li>
+                            <li>Develop and implement remediation strategies to mitigate risks.</li>
+                            <li>Stay current with testing tools, methodologies, and cyber threats.</li>
+                            <li>Communicate security issues effectively to technical and non-technical audiences.</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Qualifications and Skills</h2>
+                        <p>Penetration testers typically have a strong understanding of computer networks, operating systems, and application security. They also have experience with testing tools and methodologies.</p>
+                    </section>
+                    <section>
+                        <h2>Career Resources</h2>
+                        <p>There are various online courses, certification programs, and professional organizations available to help individuals pursue a career in penetration testing.</p>
+                    </section>
+                </main></p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="IR">Incident Responder</span>
+              <div id="IR" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><header>
+                    <h1>Job Description of an Incident Responder</h1>
+                </header>
+                <main>
+                    <section>
+                        <h2>Overview</h2>
+                        <p>An Incident Responder is a cybersecurity professional responsible for responding to and resolving security incidents, such as malware infections, data breaches, and denial-of-service attacks.</p>
+                    </section>
+                    <section>
+                        <h2>Key Responsibilities</h2>
+                        <ul>
+                            <li>Responding to security incidents</li>
+                            <li>Investigating incidents to determine scope and impact</li>
+                            <li>Identifying root causes</li>
+                            <li>Mitigating damage and preventing future incidents</li>
+                            <li>Documenting incidents and response process</li>
+                            <li>Collaborating with IT and security operations teams</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Skills and Qualifications</h2>
+                        <ul>
+                            <li>Bachelor's degree in computer science, information security, or related field</li>
+                            <li>Experience in cybersecurity or incident response</li>
+                            <li>Strong understanding of computer networks, security systems, and forensic tools</li>
+                            <li>Ability to think critically and work independently under pressure</li>
+                            <li>Excellent communication and interpersonal skills</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Career Outlook</h2>
+                        <p>Incident Responders are in high demand, and the job outlook for this profession is expected to grow much faster than average in the coming years.</p>
+                    </section>
+                </main></p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="SArc">Security Architect</span>
+              <div id="SArc" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><header>
+                    <h1>Job Description of a Security Architect</h1>
+                </header>
+                <main>
+                    <section>
+                        <h2>Overview</h2>
+                        <p>A security architect is responsible for designing, implementing, and maintaining the security of an organization's computer systems and networks.</p>
+                    </section>
+                    <section>
+                        <h2>Key Responsibilities</h2>
+                        <ul>
+                            <li>Conduct security assessments to identify and assess security risks</li>
+                            <li>Develop and implement security solutions</li>
+                            <li>Monitor and respond to security incidents</li>
+                            <li>Develop and maintain security policies and procedures</li>
+                            <li>Educate and train staff on security best practices</li>
+                            <li>Stay up-to-date on the latest security threats and trends</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Skills and Qualifications</h2>
+                        <ul>
+                            <li>Bachelor's degree in information security or related field</li>
+                            <li>Experience working in an IT security role</li>
+                            <li>Strong understanding of information security principles and practices</li>
+                            <li>Experience with security technologies</li>
+                            <li>Strategic thinking and creativity</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Career Preparation</h2>
+                        <p>To pursue a career in security architecture, it's recommended to earn relevant security certifications, such as the Certified Information Systems Security Professional (CISSP) or the Certified Ethical Hacker (CEH), in addition to obtaining a bachelor's degree and gaining experience in the field.</p>
+                    </section>
+                </main></p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="VR">Vulnerability Researcher</span>
+              <div id="VR" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><header>
+                    <h1>Job Description of a Vulnerability Researcher</h1>
+                </header>
+                <main>
+                    <section>
+                        <h2>Overview</h2>
+                        <p>A Vulnerability Researcher is responsible for identifying and mitigating vulnerabilities in computer systems, networks, and applications.</p>
+                    </section>
+                    <section>
+                        <h2>Key Responsibilities</h2>
+                        <ul>
+                            <li>Identify and exploit vulnerabilities in computer systems, networks, and applications</li>
+                            <li>Work with developers and security teams to fix vulnerabilities</li>
+                            <li>Develop and maintain tools and techniques for finding and exploiting vulnerabilities</li>
+                            <li>Stay up-to-date on the latest security threats and trends</li>
+                            <li>Educate others about security risks and best practices</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Skills and Qualifications</h2>
+                        <ul>
+                            <li>Bachelor's degree in computer science or related field</li>
+                            <li>Strong understanding of computer science and security principles</li>
+                            <li>Experience with a variety of tools and techniques for finding and exploiting vulnerabilities</li>
+                            <li>Ability to work independently and as part of a team</li>
+                            <li>Excellent communication and interpersonal skills</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Career Outlook</h2>
+                        <p>Vulnerability Researchers play a vital role in keeping computer systems and networks safe from attack, and they are in high demand.</p>
+                    </section>
+                </main></p>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+          <li>
+            <span class="info" data-modal="IR">Incident Responder</span>
+            <div id="IR" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <p><header>
+                  <h1>Incident Response Jobs</h1>
+              </header>
+              <main>
+                  <section>
+                      <h2>Overview</h2>
+                      <p>There are many jobs in the incident response field, including cyber incident responders, computer network defense incident responders, and incident response engineers. Other positions include forensics intrusion analysts, intrusion detection specialists, and network intrusion analysts.</p>
+                      <p>Regardless of the job title, most incident responders use forensic tools to address cybersecurity incidents. When not working on an incident, these professionals may lead threat prevention and education workshops with company employees.</p>
+                  </section>
+                  <section>
+                      <h2>Typical Duties</h2>
+                      <ul>
+                          <li>Providing immediate response to cybersecurity threats and intrusion</li>
+                          <li>Network management</li>
+                          <li>Vulnerability testing</li>
+                          <li>Intrusion detection and prevention</li>
+                          <li>Risk management</li>
+                          <li>Security audits</li>
+                      </ul>
+                  </section>
+                  <section>
+                      <h2>Education and Training</h2>
+                      <p>Most employers require incident responders to have a bachelor's degree in cybersecurity, information technology, computer science or a related field, while some companies also offer on-the-job training.</p>
+                  </section>
+                  <section>
+                      <h2>History of Incident Response Jobs</h2>
+                      <p>The first massive denial-of-service (Dos) attack took place in 1988, when Robert Tappan Morris created the first internet virus. The Morris Worm affected approximately 6,000 computers and cost between $200 and $53,000 to remove the virus from each infected computer.</p>
+                      <p>Such was the impact of the Morris Worm that the Defense Advanced Research Projects Agency (DARPA) created the Computer Emergency Response Team Coordination Center (CERT), which is now part of the Carnegie Mellon University's Software Engineering Institute.</p>
+                      <p>Today, every company — regardless of its size or scale — maintains an incident response team or practices to mitigate cybersecurity threats. There are also federal regulations that require many industries to have incident response plans. With increased digitization of services, incident response has become more vital, opening up newer career opportunities for cybersecurity professionals.</p>
+                  </section>
+              </main></p>
+              </div>
+            </div>
+          </li>
+          <p>Each cosmic role plays a pivotal part in safeguarding the universe against cosmic cyber threats, ensuring peace and harmony across the cosmos.</p>
+        
+        
+        
+        </section>
+
+       
+
+        <section id="beginners-roadmap-resources" class="astro-section bg-light">
+           <h2>Roadmap and Resources for Beginners</h2>
+            <h3>Roadmap</h3>
+            <ol>
+                <li><strong>Learn the basics of cyber security:</strong> Embark on a cosmic journey of discovery and understanding, delving into the fundamental concepts of cybersecurity.</li>
+                <li><strong>Get certified:</strong> Ascend to cosmic heights of expertise with industry-recognized certifications that validate your cosmic skills and knowledge.</li>
+                <li><strong>Get experience:</strong> Explore cosmic realms of opportunity and gain hands-on experience through internships, volunteer work, or personal projects.</li>
+            </ol>
+            <h3>Resources</h3>
+            <ul>
+                <li><a href="https://www.sans.org" target="_blank">SANS Institute</a> - Unleash the power of cosmic knowledge with cybersecurity training courses and resources.</li>
+                <li><a href="https://www.nist.gov" target="_blank">National Institute of Standards and Technology (NIST)</a> - Navigate cosmic frameworks and guidelines to fortify your cosmic security defenses.</li>
+                <li><a href="https://owasp.org" target="_blank">Open Web Application Security Project (OWASP)</a> - Harness cosmic community-driven initiatives to enhance the security of cosmic software.</li>
+            </ul>
+            <p>With these cosmic resources and roadmap in hand, beginners can embark on an epic journey towards mastering the cosmic art of cybersecurity.</p>
+        
+        </section>
+
+        
+        
+
+        <section id="certifications" class="astro-section bg-light">
+          <h2>Cyber Security Certifications</h2>
+          <ul>
+            <li>
+              <span class="info" data-modal="CS">CompTIA Security+</span>
+              <div id="CS" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><header>
+                    <h1>CompTIA Security+ Certification</h1>
+                </header>
+                <main>
+                    <section>
+                        <h2>Overview</h2>
+                        <p>CompTIA Security+ is an entry-level certification that IT professionals can earn to establish the core knowledge needed for cybersecurity roles. It's a vendor-neutral certification that's globally recognized and trusted by the IT industry.</p>
+                        <p>CompTIA Security+ focuses on practical skills and prepares candidates for intermediate-level cybersecurity jobs, such as systems administrator. It teaches IT professionals how to identify and address security incidents, and mitigate vulnerabilities before they infiltrate information systems.</p>
+                    </section>
+                    <section>
+                        <h2>Target Audience</h2>
+                        <p>CompTIA Security+ is intended for IT professionals with two years of experience in IT administration with a security focus, or equivalent training.</p>
+                    </section>
+                    <section>
+                        <h2>Validity and Renewal</h2>
+                        <p>The certification is valid for three years from the date the exam is passed, and can be renewed for additional three-year periods through CompTIA's continuing education (CE) program.</p>
+                    </section>
+                    <section>
+                        <h2>Tips for Exam Preparation</h2>
+                        <ul>
+                            <li>Read all answer options carefully</li>
+                            <li>Eliminate answer options that are known to be wrong</li>
+                            <li>Flag questions for review if you're unsure about them</li>
+                            <li>Pay attention to words like "best," "most," and "least" in the questions</li>
+                            <li>Take sample tests from multiple vendors</li>
+                            <li>Continue preparing until you can reliably pass with an 80 or 90 percent</li>
+                            <li>Answer every question, even if you have to guess</li>
+                        </ul>
+                    </section>
+                </main></p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="CEH">Certified Ethical Hacker (CEH)</span>
+              <div id="CEH" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><header>
+                    <h1>Certified Ethical Hacker (CEH) Certification</h1>
+                </header>
+                <main>
+                    <section>
+                        <h2>Overview</h2>
+                        <p>The Certified Ethical Hacker (CEH) is a globally recognized certification program that teaches ethical hacking to information and communication technology (ICT) professionals. The program teaches the five phases of ethical hacking: Reconnaissance, Scanning, Gaining access, Maintaining access, and Covering your tracks.</p>
+                    </section>
+                    <section>
+                        <h2>Program Details</h2>
+                        <ul>
+                            <li>Training: 5 days of training with 20 modules</li>
+                            <li>Labs: Over 220 hands-on labs with competition flags</li>
+                            <li>Tools: Over 3,500 hacking tools</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Exam</h2>
+                        <p>The CEH exam consists of 125 multiple-choice questions that must be completed in four hours.</p>
+                    </section>
+                    <section>
+                        <h2>Eligibility</h2>
+                        <p>To be eligible to take the exam, candidates must meet one of the following criteria:</p>
+                        <ul>
+                            <li>Have at least two years of work experience in the information security domain</li>
+                            <li>Attend official training</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Issuing Authority</h2>
+                        <p>The International Council of E-Commerce Consultants (EC-Council) issues CEH credentials. The goal of the CEH certification is to promote ethical hacking as a self-regulating profession that is strictly governed by standards.</p>
+                    </section>
+                </main></p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="CISSP">(ISC)² Certified Information Systems Security Professional (CISSP)</span>
+              <div id="CISSP" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><header>
+                    <h1>CISSP-ISSAP Certification</h1>
+                </header>
+                <main>
+                    <section>
+                        <h2>Overview</h2>
+                        <p>The Certified Information Systems Security Professional (CISSP) is a globally recognized certification for IT security professionals developed by the International Information Systems Security Certification Consortium (ISC)². It's a management-level qualification for senior- and director-level managers in information security and is highly sought after by employers.</p>
+                    </section>
+                    <section>
+                        <h2>Requirements</h2>
+                        <ul>
+                            <li>Have at least five years of full-time, hands-on experience in at least two of the eight CISSP domains</li>
+                            <li>Pass the certification exam, which is a six-hour exam consisting of 250 questions</li>
+                            <li>Complete the CISSP exam agreement</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Curriculum</h2>
+                        <p>The CISSP curriculum is divided into eight domains:</p>
+                        <ol>
+                            <li>Security and risk management</li>
+                            <li>Asset security</li>
+                            <li>Security architecture and engineering</li>
+                            <li>Communication and network security</li>
+                            <li>Identity and access management (IAM)</li>
+                            <li>Security assessment and testing</li>
+                            <li>Security operations</li>
+                            <li>Software development security</li>
+                        </ol>
+                    </section>
+                    <section>
+                        <h2>Exam Details</h2>
+                        <p>The CISSP exam is challenging and can take up to three hours. The questions vary in difficulty based on your previous submissions.</p>
+                    </section>
+                </main></p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="GSEC">GIAC Security Essentials (GSEC)</span>
+              <div id="GSEC" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><header>
+                    <h1>GSEC Certification</h1>
+                </header>
+                <main>
+                    <section>
+                        <h2>Overview</h2>
+                        <p>The GIAC Security Essentials (GSEC) certification is an intermediate-level certification for information security professionals with some background in networking and information systems. It's a nationally recognized certification in the cybersecurity industry that validates a practitioner's knowledge of information security beyond basic concepts and terminology.</p>
+                    </section>
+                    <section>
+                        <h2>Coverage Areas</h2>
+                        <ul>
+                            <li>Access control and password management</li>
+                            <li>Cryptography</li>
+                            <li>Cloud</li>
+                            <li>Defensible network architecture</li>
+                            <li>Networking</li>
+                            <li>AWS fundamentals</li>
+                            <li>Microsoft cloud</li>
+                            <li>Container and MacOS security</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Requirements</h2>
+                        <p>To earn the GSEC certification, candidates must pass a written exam. The certification is valid for four years.</p>
+                    </section>
+                </main></p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="OSCP">Offensive Security Certified Professional (OSCP)</span>
+              <div id="OSCP" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><header>
+                    <h1>Offensive Security Certified Professional (OSCP)</h1>
+                </header>
+                <main>
+                    <section>
+                        <h2>Overview</h2>
+                        <p>The Offensive Security Certified Professional (OSCP) is an ethical hacking certification that validates a professional's penetration testing skills. It's offered by Offensive Security (OffSec) and is based on Kali Linux tools and methodologies.</p>
+                    </section>
+                    <section>
+                        <h2>Requirements</h2>
+                        <ul>
+                            <li>Complete the Penetration Testing with Kali Linux (PWK) course with OffSec</li>
+                            <li>Pass a 24-hour practical exam</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Benefits</h2>
+                        <p>OSCP certification is geared towards current cyber security professionals who want to take a serious step into penetration testing. OSCP holders demonstrate the ability to:</p>
+                        <ul>
+                            <li>Identify vulnerabilities</li>
+                            <li>Execute organized attacks under tight time constraints</li>
+                            <li>Think outside the box</li>
+                        </ul>
+                        <p>OSCP is a hands-on certification that requires holders to successfully attack and penetrate various live machines in a safe lab environment. OSCPs are generally well-versed in identifying known and unknown vulnerabilities, including configuration mistakes.</p>
+                    </section>
+                </main></p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="CISA">Certified Information Systems Auditor (CISA)</span>
+              <div id="CISA" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><h2>Certified Information Systems Auditor (CISA)</h2>
+                    <p>
+                        The Certified Information Systems Auditor (CISA) is a certification and a globally recognized standard for appraising an IT auditor's knowledge, expertise and skill in assessing vulnerabilities and instituting IT controls in an enterprise environment.
+                    </p>
+                    <p>
+                        This certification is issued by ISACA to people in charge of ensuring an organization's IT and business systems are monitored, managed and protected. It is presented after completion of a comprehensive testing and application process. It is designed for IT auditors, audit managers, consultants and security professionals.
+                    </p>
+                    <p>
+                        Attaining CISA certification is considered beneficial because it is accepted by employers worldwide and is often requested for IT audit and security information management (SIM) positions. The certification provides the holder with greater visibility throughout the job application process since most recruiters prefer and keep an eye out for IT auditors with a CISA certification.
+                    </p>
+                    <p>
+                        <strong>Responsibilities of a Certified Information Systems Auditor</strong><br>
+                        The primary duties of a CISA include:
+                        <ul>
+                            <li>Implementing an audit strategy for information systems (IS) that is based on risk management.</li>
+                            <li>Planning audits that can be used to determine whether or not IT assets are protected, managed and valuable.</li>
+                            <li>Executing the audits in compliance with the organization's set standards and objectives.</li>
+                            <li>Sharing audit results and providing recommendations to management based on the results.</li>
+                            <li>Performing reexaminations of the audits to ensure the recommended actions have been performed by management.</li>
+                        </ul>
+                    </p></p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="AWS">AWS Certified Security – Specialty</span>
+              <div id="AWS" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><h2>AWS Certified Security – Specialty (SCS-C02)</h2>
+                    <p>
+                        The AWS Certified Security – Specialty (SCS-C02) certification is issued by Amazon Web Services Training and Certification. It validates a professional's knowledge of how to create and implement security solutions in the AWS Cloud. The certification demonstrates a professional's understanding of:
+                    </p>
+                    <ul>
+                        <li>Data classifications</li>
+                        <li>Data protection mechanisms</li>
+                        <li>Data encryption methods</li>
+                        <li>Secure internet protocols</li>
+                        <li>The shared responsibility model between AWS and the customer</li>
+                        <li>Security models</li>
+                        <li>Infrastructure security</li>
+                        <li>Incident response</li>
+                        <li>Identity and access management</li>
+                        <li>Monitoring and logging</li>
+                    </ul>
+                    <p>
+                        The certification is intended for students who want to understand AWS security services, including the methods and strategies to protect data and infrastructure from internal and external threats. It's also designed for professionals who perform a security role.
+                    </p>
+                    <p>
+                        According to Global Knowledge's 2020 IT Skills and Salary Report, the AWS Certified Security – Specialty certification was one of the most popular cybersecurity certifications of 2020. 96% of IT leaders believe that team members with cybersecurity certifications add value to their organizations.
+                    </py</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="MCA">Microsoft Certified Azure Security Engineer</span>
+              <div id="MCA" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p><h2>Microsoft Certified: Azure Security Engineer Associate</h2>
+                    <p>
+                        The Microsoft Certified: Azure Security Engineer Associate certification validates that you can manage identity and access, implement platform protection, manage security operations, and secure data and applications. This certification involves implementing, managing, and monitoring security for resources in Azure, multi-cloud, and hybrid environments.
+                    </p>
+                    <p>
+                        Azure Security Engineers are cybersecurity professionals who use Azure to protect their clients' data. Their responsibilities include:
+                    </p>
+                    <ul>
+                        <li>Implementing security controls and threat protection</li>
+                        <li>Managing identity and access</li>
+                        <li>Protecting data, applications, and networks in cloud and hybrid environments</li>
+                        <li>Developing and deploying cloud security frameworks in Azure environments</li>
+                        <li>Working with senior IT security team members to create and implement new cybersecurity strategies</li>
+                    </ul>
+                    <p>
+                        The Microsoft security engineer certification path has three levels: Fundamentals, Associate, and Expert. The Microsoft Certified: Azure Security Engineer Associate certification requires Exam AZ-500.
+                    </p>
+                    <p>
+                        You can prepare for the Azure Security Engineer Associate certification with self-paced training or instructor-led training. Self-paced training is less expensive and allows you to customize your learning experience based on your interests and needs. Instructor-led training provides the instructor's real-world experience.
+                    </p></p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        
+
+        <section id="beginners-resources" class="astro-section bg-light">
+            <h2>Resources for Beginners</h2>
+            <h3>Online Courses</h3>
+            <ul>
+                <li><a href="https://www.coursera.org/courses?query=cybersecurity" target="_blank">Coursera</a></li>
+                <li><a href="https://www.edx.org/learn/cybersecurity" target="_blank">edX</a></li>
+                <li><a href="https://www.udemy.com/topic/cyber-security/" target="_blank">Udemy</a></li>
+                <li><a href="https://www.khanacademy.org/computing/computers-and-internet/xcae6f4a7ff015e7d:online-data-security"
+                        target="_blank">Khan Academy Cybersecurity Course</a></li>
+            </ul>
+            <h3>Books</h3>
+            <ul>
+                <li>"Getting Started with Penetration Testing" by Georgia Weidman</li>
+                <li>"The Hacker Playbook 3" by Peter Kim</li>
+                <li>"Cryptography Engineering: Design Principles and Practical Applications" by Niels Ferguson, Bruce
+                    Schneier, and Tadayoshi Kohno</li>
+                  <li>The Web Application Hacker's Handbook: Finding and Exploiting Security Flaws</li>
+            </ul>
+            <h3>Websites</h3>
+            <ul>
+                <li><a href="https://www.sans.org/" target="_blank">SANS Institute</a></li>
+                <li><a href="https://www.nist.gov/cyberframework" target="_blank">National Institute of Standards and
+                        Technology (NIST) Cybersecurity Framework</a></li>
+                <li><a href="https://owasp.org/" target="_blank">Open Web Application Security Project (OWASP)</a></li>
+            </ul>
+        </section>
+
+        <section id="attacher-types" class="astro-section bg-light">
+            <h2>Different Types of Cyber Security Attacks</h2>
+            <ul>
+                <li>WhiteHat Hackers</li>
+                <li>GreyHat</li>
+                <li>Ransomware</li>
+                </ul>
+          </section>
+
+        <section id="attack-types" class="astro-section bg-light">
+          <h2>Types of Cyber Security Attacks</h2>
+          <ul>
+            <li>
+              <span class="info" data-modal="Phishing">Phishing</span>
+              <div id="Phishing" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p>All about Phishing</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="Malware">Malware</span>
+              <div id="Malware" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p>All about Malware</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="Ransomware">Ransomware</span>
+              <div id="Ransomware" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p>All about Ransomware</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="DoS">Denial-of-Service (DoS) Attacks</span>
+              <div id="DoS" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p>All about Denial-of-Service (DoS) Attacks</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="MitM">Man-in-the-Middle (MitM) Attacks</span>
+              <div id="MitM" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p>All about Man-in-the-Middle (MitM) Attacks</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="SQL">SQL Injection</span>
+              <div id="SQL" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p>All about SQL Injection</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="info" data-modal="ZDA">Zero-Day Attacks</span>
+              <div id="ZDA" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p>All about Zero-Day Attacks</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section id="security-tips" class="astro-section bg-light">
+            <h2>Cyber Security Tips for Individuals</h2>
+            <ul>
+                <li>Use strong passwords and enable two-factor authentication (2FA)</li>
+                <li>Keep software updated</li>
+                <li>Be cautious about clicking on links or opening attachments in emails</li>
+                <li>Back up your data regularly</li>
+                <li>Use a firewall and antivirus software</li>
+                <li>Be aware of social engineering scams</li>
+                <li>Educate yourself about cyber security threats</li>
+            </ul>
+        </section>
+    </main>
+
+    
+
+    <script>
+    //// Get all the spans that can open modals
+var infos = document.getElementsByClassName('info');
+
+// For each span, add a click event listener
+for (var i = 0; i < infos.length; i++) {
+  infos[i].addEventListener('click', function() {
+    // Get the modal id from the data-modal attribute
+    var modalId = this.getAttribute('data-modal');
+    // Get the modal element
+    var modal = document.getElementById(modalId);
+    // Show the modal
+    modal.style.display = 'block';
+  });
+}
+
+// Get all the close buttons
+var closeButtons = document.getElementsByClassName('close');
+
+// For each close button, add a click event listener
+for (var i = 0; i < closeButtons.length; i++) {
+  closeButtons[i].addEventListener('click', function() {
+    // Get the modal element (the parent of the parent of the close button)
+    var modal = this.parentElement.parentElement;
+    // Hide the modal
+    modal.style.display = 'none';
+  });
+}
+</script>
+
+
+</body>
+
+</html>
