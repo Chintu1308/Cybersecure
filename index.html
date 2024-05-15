@@ -243,7 +243,7 @@
             transition: opacity 0.5s ease;
         }
         .modal-content {
-          background-color: var(--astro-main-bg-color);
+            background-color: var(--astro-main-bg-color);
             border-radius: 10px; /* This will give the modal curved edges */
   
             margin: 15% auto;
@@ -2991,6 +2991,12 @@ for (var i = 0; i < closeButtons.length; i++) {
 
   const themeToggle = document.getElementById('status');
 
+  // Check if the user prefers a dark theme
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    themeToggle.checked = true;
+    document.documentElement.className = 'dark';
+  }
+
   themeToggle.addEventListener('change', function() {
     var root = document.documentElement;
     if (themeToggle.checked) {
@@ -2999,7 +3005,6 @@ for (var i = 0; i < closeButtons.length; i++) {
       root.className = 'light';
     }
   });
-
 </script>
 
 
