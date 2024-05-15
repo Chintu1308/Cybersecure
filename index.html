@@ -18,8 +18,23 @@
         body {
           font-family: Arial, sans-serif;
           line-height: 1.6;
-          color: #333;
-          background-color: #f4f4f4;
+          background-color: var(--background-color);
+          color: var(--text-color);
+          font-size: 1em; /* Instead of px */
+        }
+
+        /* Light theme */
+        :root.light {
+          --background-color: #ffffff;
+          --text-color: #000000;
+          --astro-main-bg-color: #f0f0f0;
+        }
+
+        /* Dark theme */
+        :root.dark {
+          --background-color: #000000;
+          --text-color: #ffffff;
+          --astro-main-bg-color: #040f13;
         }
     
         .container {
@@ -133,6 +148,9 @@
           padding: 20px;
           margin-bottom: 20px;
           border-radius: 10px;
+          width: 100%; /* Take full width on small screens */
+          box-sizing: border-box; /* Include padding and border in element's total width and height */
+        
         }
     
         .activity-box h2 {
@@ -178,7 +196,7 @@
 
           .astro-main section {
               border: 2px solid #50b3a2;
-              background-color: #f0f0f0;
+              background-color: var(--astro-main-bg-color);
               padding: 20px;
               margin-bottom: 20px;
               border-radius: 10px;
@@ -204,6 +222,7 @@
             .section-content {
                 display: flex; /* Use flexbox */
                 justify-content: space-between; /* Distribute sections horizontally */
+                width: 50%;
             }
         }
 
@@ -224,7 +243,7 @@
             transition: opacity 0.5s ease;
         }
         .modal-content {
-            background-color: #e8e8e8;
+          background-color: var(--astro-main-bg-color);
             border-radius: 10px; /* This will give the modal curved edges */
   
             margin: 15% auto;
@@ -245,17 +264,25 @@
         }
 
         .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
+          color: #aaaaaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+          border: 1px solid #aaaaaa; /* Add border */
+          border-radius: 50%; /* Make it round */
+          width: 30px; /* Specify a width */
+          height: 30px; /* Specify a height */
+          text-align: center; /* Center the 'x' */
+          line-height: 30px; /* Align 'x' vertically */
+          background: linear-gradient(to right, red, darkred); /* Add linear gradient background */
 
+        }
+        
         .close:hover,
         .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
+          color: #000;
+          text-decoration: none;
+          cursor: pointer;
         }
 
         span {
@@ -268,7 +295,55 @@
           background: linear-gradient(120deg, transparent, rgb(0, 247, 255), transparent);
         }
        
-
+        
+        
+        .custom-checkbox {
+          position: relative;
+          display: inline-block;
+          width: 60px;
+          height: 34px;
+        }
+        
+        .custom-checkbox input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+        }
+        
+        .status-switch {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #ccc;
+          transition: .4s;
+        }
+        
+        .status-switch:before {
+          position: absolute;
+          content: "";
+          height: 26px;
+          width: 26px;
+          left: 4px;
+          bottom: 4px;
+          background-color: white;
+          transition: .4s;
+        }
+        
+        input:checked + label .status-switch {
+          background-color: #040f13;
+        }
+        
+        input:checked + label .status-switch:before {
+          transform: translateX(26px);
+        }
+        
+        /* On mouse-over, add a grey background color */
+        .custom-checkbox:hover input:not(:checked) + label .status-switch {
+          background-color: #ccc;
+        }
         
 
     </style>
@@ -297,11 +372,20 @@
         <li><a href="#beginners-resources" class="info" data-modal="beginners-resources">Beginner's Resources</a></li>
         <li><a href="#attacher-types" class="info" data-modal="attacher-types">Different types of attacks</a></li>
         <li><a href="#attack-types" class="info" data-modal="attack-types">Attack Types</a></li>
+        <li><a href="#ctf-section" class="info" data-modal="ctf-section">Capture The Flag (CTF)</a></li>
         <li><a href="#security-tips" class="info" data-modal="security-tips">Security Tips</a></li>
       </ul>
     </nav>
 
     <main class="astro-main">
+
+      <h4 style="align-content: center;">Dark Mode</h4>
+      <div class="custom-checkbox">
+        <input id="status" type="checkbox" name="status">
+        <label for="status">
+            <div class="status-switch" data-unchecked="Off" data-checked="On"></div>
+        </label>
+    </div>
 
 <section>
     <header><h1>Welcome to the Exciting World of Cybersecurity!</h1></header>
@@ -2797,6 +2881,68 @@
     </section>
     
 
+
+    <section id="ctf-section" class="astro-section bg-light">
+      <header><h2>Dive Deep: Exploring Capture the Flag (CTF)</h2><h5>-for self-learners</h5></header>
+      <p>Capture the Flag (CTF) is a gamified cybersecurity competition where participants test their hacking and problem-solving skills in a safe, controlled environment. Imagine a treasure hunt meets a cybersecurity bootcamp – that's the essence of CTFs!</p>
+      
+      <h3>Benefits for Beginners and Pros:</h3>
+      <ul>
+          <li>
+              <strong>For Beginners:</strong>
+              <ul>
+                  <li>Learn by Doing: CTFs provide a hands-on approach to learning cybersecurity concepts.</li>
+                  <li>Build a Strong Foundation: CTFs often start with beginner-friendly challenges, gradually increasing in difficulty.</li>
+                  <li>Boost Confidence: Successfully solving challenges fosters a sense of accomplishment.</li>
+              </ul>
+          </li>
+          <li>
+              <strong>For Pros:</strong>
+              <ul>
+                  <li>Sharpen Your Skills: CTFs offer a platform to hone your existing cybersecurity expertise.</li>
+                  <li>Stay Up-to-Date: The ever-evolving nature of CTFs keeps you abreast of the latest trends and vulnerabilities.</li>
+                  <li>Network with Others: CTFs often have team-based categories, allowing you to collaborate with other professionals.</li>
+              </ul>
+          </li>
+      </ul>
+      
+      <h3>Developing Self-Learning Skills:</h3>
+      <ul>
+          <li>
+              <strong>Problem-Solving Approach:</strong> You'll learn to dissect challenges, analyze clues, and apply various approaches to find a solution.
+          </li>
+          <li>
+              <strong>Research & Resourcefulness:</strong> CTFs often require independent research to uncover hidden information or utilize specific tools.
+          </li>
+          <li>
+              <strong>Resilience & Persistence:</strong> Getting stuck on a challenge is part of the CTF experience. You'll develop perseverance and the ability to keep trying different approaches.
+          </li>
+      </ul>
+      
+      <h3>Types of CTFs:</h3>
+      <ul>
+          <li>Jeopardy-style: Multiple categories with various challenges like cryptography, web exploitation, and forensics.</li>
+          <li>Attack-Defense: Teams not only defend their own infrastructure but also try to attack and capture flags from other teams' systems.</li>
+          <li>Penetration Testing: Participants are tasked with compromising a simulated network or system.</li>
+      </ul>
+      
+      <h3>Getting Started with CTFs:</h3>
+      <ul>
+          <li>Start Small: Begin with beginner-friendly platforms like <a href="https://overthewire.org/">OverTheWire</a> or <a href="https://www.root-me.org/en/">Root-Me</a> that offer tutorials and guided challenges.</li>
+          <li>Join the Community: Online forums and communities like <a href="https://www.reddit.com/r/securityCTF/">r/securityCTF</a> are a wealth of information.</li>
+          <li>Don't Be Afraid to Ask: Stuck on a challenge? Reach out to the CTF community forums or online resources for help.</li>
+      </ul>
+      
+      <h3>Additional Tips:</h3>
+      <ul>
+          <li>Practice Makes Perfect: The more CTFs you participate in, the better you'll become.</li>
+          <li>Document Your Journey: Keep notes on the challenges you've solved and the techniques you've learned.</li>
+          <li>Focus on Learning: Winning isn't everything. The true purpose of CTFs is to learn and grow as a cybersecurity professional.</li>
+      </ul>
+      
+      <p>So, are you ready to test your skills and delve into the exciting world of CTFs? Grab your virtual tools, embrace the challenge, and get ready to learn!</p>
+  </section>
+
         <section id="security-tips" class="astro-section bg-light">
             <h2>Cyber Security Tips for Individuals</h2>
             <ul>
@@ -2841,6 +2987,19 @@ for (var i = 0; i < closeButtons.length; i++) {
     modal.style.display = 'none';
   });
 }
+
+
+  const themeToggle = document.getElementById('status');
+
+  themeToggle.addEventListener('change', function() {
+    var root = document.documentElement;
+    if (themeToggle.checked) {
+      root.className = 'dark';
+    } else {
+      root.className = 'light';
+    }
+  });
+
 </script>
 
 
