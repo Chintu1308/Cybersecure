@@ -35,6 +35,7 @@
           color: white;
           text-align: center;
           animation: fadeIn 2s ease-in;
+          border-radius: 20px;
         }
     
         header h1 {
@@ -277,13 +278,12 @@
 </head>
 
 <body class="astro">
-    <header class="astro-header bg-dark text-white">
+    
         <video autoplay muted loop id="myVideo">
             <source src="video.mp4" type="video/mp4">
             Your browser does not support HTML5 video.
         </video>
-    </header>
-
+    
 
     <nav class="astro-nav bg-secondary">
       <ul class="list-unstyled d-flex justify-content-center">
@@ -302,7 +302,31 @@
     </nav>
 
     <main class="astro-main">
-        <section id="top-colleges" class="astro-section bg-light">
+
+<section>
+    <header><h1>Welcome to the Exciting World of Cybersecurity!</h1></header>
+    <p>Whether you're a complete beginner or looking to expand your skillset, this is the perfect place to start your journey.</p>
+
+    <p>Cybersecurity is all about protecting our increasingly digital world. It encompasses safeguarding information systems, networks, and data from unauthorized access, use, disclosure, disruption, modification, or destruction. This critical field ensures the CIA triad – Confidentiality, Integrity, and Availability – of information.</p>
+
+    <h2>Core Principles:</h2>
+    <ul>
+        <li><strong>Confidentiality:</strong> Ensuring only authorized individuals can access sensitive information. Encryption plays a crucial role here, scrambling data so only authorized users can decipher it.</li>
+        <li><strong>Integrity:</strong> Guaranteeing the accuracy and trustworthiness of data. Techniques like digital signatures help ensure data integrity.</li>
+        <li><strong>Availability:</strong> Making sure authorized users have access to information and systems whenever needed.</li>
+    </ul>
+
+    <p>Understanding these core principles is fundamental to grasping cybersecurity concepts.</p>
+
+    <h2>Comprehensive Guide:</h2>
+    <p>This guide provides a roadmap to navigate this ever-evolving field. We'll explore foundational topics, highlight valuable resources, and showcase opportunities to develop your skills. Remember, the key is to learn at your own pace, focus on practical understanding, and actively assess your progress.</p>
+
+    <p>Forget about chasing certifications – let's build your cybersecurity expertise together! For self-motivated learners, tackling Capture the Flag (CTF) challenges offers a fun way to test your newfound knowledge. We'll delve deeper into CTFs later, so stay tuned.</p>
+</section>
+        
+      
+      
+      <section id="top-colleges" class="astro-section bg-light">
           <h2>Top Colleges for Cyber Security in India</h2>
           <p>Embark on a cosmic journey of learning and exploration in the realm of cybersecurity. Discover the celestial institutions offering stellar programs:</p>
           <ul>
@@ -2603,83 +2627,175 @@
             </ul>
         </section>
 
-        <section id="attacher-types" class="astro-section bg-light">
-            <h2>Different Types of Cyber Security Attacks</h2>
-            <ul>
-                <li>WhiteHat Hackers</li>
-                <li>GreyHat</li>
-                <li>Ransomware</li>
-                </ul>
-          </section>
-
-        <section id="attack-types" class="astro-section bg-light">
-          <h2>Types of Cyber Security Attacks</h2>
+        <section id="attacker-types" class="astro-section bg-light">
+          <h2>Different Types of Cybersecurity Attackers</h2>
           <ul>
-            <li>
-              <span class="info" data-modal="Phishing">Phishing</span>
-              <div id="Phishing" class="modal">
-                <div class="modal-content">
-                  <span class="close">&times;</span>
-                  <p>All about Phishing</p>
-                </div>
-              </div>
-            </li>
-            <li>
-              <span class="info" data-modal="Malware">Malware</span>
-              <div id="Malware" class="modal">
-                <div class="modal-content">
-                  <span class="close">&times;</span>
-                  <p>All about Malware</p>
-                </div>
-              </div>
-            </li>
-            <li>
-              <span class="info" data-modal="Ransomware">Ransomware</span>
-              <div id="Ransomware" class="modal">
-                <div class="modal-content">
-                  <span class="close">&times;</span>
-                  <p>All about Ransomware</p>
-                </div>
-              </div>
-            </li>
-            <li>
-              <span class="info" data-modal="DoS">Denial-of-Service (DoS) Attacks</span>
-              <div id="DoS" class="modal">
-                <div class="modal-content">
-                  <span class="close">&times;</span>
-                  <p>All about Denial-of-Service (DoS) Attacks</p>
-                </div>
-              </div>
-            </li>
-            <li>
-              <span class="info" data-modal="MitM">Man-in-the-Middle (MitM) Attacks</span>
-              <div id="MitM" class="modal">
-                <div class="modal-content">
-                  <span class="close">&times;</span>
-                  <p>All about Man-in-the-Middle (MitM) Attacks</p>
-                </div>
-              </div>
-            </li>
-            <li>
-              <span class="info" data-modal="SQL">SQL Injection</span>
-              <div id="SQL" class="modal">
-                <div class="modal-content">
-                  <span class="close">&times;</span>
-                  <p>All about SQL Injection</p>
-                </div>
-              </div>
-            </li>
-            <li>
-              <span class="info" data-modal="ZDA">Zero-Day Attacks</span>
-              <div id="ZDA" class="modal">
-                <div class="modal-content">
-                  <span class="close">&times;</span>
-                  <p>All about Zero-Day Attacks</p>
-                </div>
-              </div>
-            </li>
+              <li>
+                  <span class="info" data-modal="Amateurs">Amateurs</span>
+                  <div id="Amateurs" class="modal">
+                      <div class="modal-content">
+                          <span class="close">&times;</span>
+                          <h2>Amateurs (Script Kiddies & Blue Hats)</h2>
+                          <p><strong>Script Kiddies:</strong> These are the novices of the attacker world. Often teenagers or young adults, they lack advanced technical skills and rely on readily available tools and scripts found online.</p>
+                          <p><strong>Blue Hats:</strong> Another type of amateur, blue hats possess a curiosity about hacking but may lack clear ethical boundaries.</p>
+                      </div>
+                  </div>
+              </li>
+              <li>
+                  <span class="info" data-modal="Hackers">Hackers</span>
+                  <div id="Hackers" class="modal">
+                      <div class="modal-content">
+                          <span class="close">&times;</span>
+                          <h2>Hackers</h2>
+                          <p><strong>Black Hats:</strong> The malicious actors of the hacking world, black hats exploit vulnerabilities for personal gain.</p>
+                          <p><strong>White Hats (Ethical Hackers):</strong> These are the good guys of the hacking world.</p>
+                          <p><strong>Gray Hats:</strong> Operating in a moral gray area, gray hats may use their hacking skills for self-serving purposes but not necessarily with malicious intent.</p>
+                      </div>
+                  </div>
+              </li>
+              <li>
+                  <span class="info" data-modal="OrganizedHackers">Organized Hackers</span>
+                  <div id="OrganizedHackers" class="modal">
+                      <div class="modal-content">
+                          <span class="close">&times;</span>
+                          <h2>Organized Hackers</h2>
+                          <p><strong>Cybercriminal Groups:</strong> These are well-organized criminal enterprises specializing in cyberattacks.</p>
+                          <p><strong>Hacktivists:</strong> Motivated by political or social causes, hacktivists launch attacks to disrupt operations.</p>
+                          <p><strong>State-Sponsored Hackers:</strong> These attackers are backed by nation-states with the resources to mount large-scale and sophisticated attacks.</p>
+                      </div>
+                  </div>
+              </li>
           </ul>
-        </section>
+      </section>
+      
+
+      <section id="cyber-attacks" class="astro-section bg-light">
+        <h2>Different Types of Cybersecurity Attacks</h2>
+        <ul>
+            <li>
+                <span class="info" data-modal="Phishing">Phishing</span>
+                <div id="Phishing" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Phishing</h2>
+                        <p><strong>Description:</strong> This deceptive tactic tries to trick users into revealing sensitive information like passwords or credit card details.</p>
+                        <p><strong>Examples:</strong> Phishing emails, fake login pages.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <span class="info" data-modal="Malware">Malware</span>
+                <div id="Malware" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Malware (Malicious Software)</h2>
+                        <p><strong>Description:</strong> A broad term encompassing various forms of harmful software designed to infiltrate and damage computer systems.</p>
+                        <p><strong>Examples:</strong> Viruses, worms, trojans, ransomware.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <span class="info" data-modal="Ransomware">Ransomware</span>
+                <div id="Ransomware" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Ransomware</h2>
+                        <p><strong>Description:</strong> A particularly nasty form of malware that encrypts your files, rendering them inaccessible.</p>
+                        <p><strong>Examples:</strong> WannaCry, Petya.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <span class="info" data-modal="DoS">Denial-of-Service (DoS) Attacks</span>
+                <div id="DoS" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Denial-of-Service (DoS) Attacks</h2>
+                        <p><strong>Description:</strong> These attacks overwhelm a website or server with a flood of traffic, making it unavailable to legitimate users.</p>
+                        <p><strong>Examples:</strong> Distributed Denial-of-Service (DDoS) attacks, SYN flood attacks.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <span class="info" data-modal="MitM">Man-in-the-Middle (MitM) Attacks</span>
+                <div id="MitM" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Man-in-the-Middle (MitM) Attacks</h2>
+                        <p><strong>Description:</strong> Cybercriminals position themselves between you and a trusted website, eavesdropping on communication and potentially stealing sensitive data like login credentials.</p>
+                        <p><strong>Examples:</strong> Wi-Fi eavesdropping, session hijacking.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <span class="info" data-modal="SQLInjection">SQL Injection</span>
+                <div id="SQLInjection" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>SQL Injection</h2>
+                        <p><strong>Description:</strong> Exploiting vulnerabilities in database systems, attackers can inject malicious code to steal or manipulate sensitive data stored within.</p>
+                        <p><strong>Examples:</strong> Manipulating login forms, extracting database records.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <span class="info" data-modal="ZeroDay">Zero-Day Attacks</span>
+                <div id="ZeroDay" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Zero-Day Attacks</h2>
+                        <p><strong>Description:</strong> These attacks exploit previously unknown vulnerabilities in software or systems.</p>
+                        <p><strong>Examples:</strong> Using unpatched exploits, bypassing security measures.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <span class="info" data-modal="SocialEngineering">Social Engineering</span>
+                <div id="SocialEngineering" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Social Engineering</h2>
+                        <p><strong>Description:</strong> This psychological manipulation tactic tricks users into divulging confidential information or granting access to systems.</p>
+                        <p><strong>Examples:</strong> Phishing calls, pretexting.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <span class="info" data-modal="Botnet">Botnet</span>
+                <div id="Botnet" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Botnet</h2>
+                        <p><strong>Description:</strong> A network of compromised devices controlled by a single attacker.</p>
+                        <p><strong>Examples:</strong> DDoS attacks, spam distribution.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <span class="info" data-modal="PathAttacks">Path Attacks</span>
+                <div id="PathAttacks" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Path Attacks</h2>
+                        <p><strong>Description:</strong> Exploit weaknesses in routing protocols, manipulating the path data packets take on a network.</p>
+                        <p><strong>Examples:</strong> BGP hijacking, route poisoning.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <span class="info" data-modal="SEOPoisoning">SEO Poisoning</span>
+                <div id="SEOPoisoning" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>SEO Poisoning</h2>
+                        <p><strong>Description:</strong> Black hat SEO techniques manipulate search engine algorithms to rank malicious websites higher in search results.</p>
+                        <p><strong>Examples:</strong> Injecting malicious keywords, creating fake backlinks.</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </section>
+    
 
         <section id="security-tips" class="astro-section bg-light">
             <h2>Cyber Security Tips for Individuals</h2>
