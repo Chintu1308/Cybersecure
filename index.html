@@ -23,11 +23,32 @@
           font-size: 1em; /* Instead of px */
         }
 
+
+        :root {
+  --astro-main-bg-color-light: #f0f0f0; /* Default light theme background color */
+  --astro-main-bg-color-dark: #040f13; /* Default dark theme background color */
+}
+
+/* Other styles for your elements */
+
+/* Media query for dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --astro-main-bg-color: var(--astro-main-bg-color-dark);
+  }
+}
+
+/* Default to light mode */
+:root {
+  --astro-main-bg-color: var(--astro-main-bg-color-light);
+}
+
+
         /* Light theme */
         :root.light {
           --background-color: #ffffff;
           --text-color: #000000;
-          --astro-main-bg-color: #f0f0f0;
+          --astro-main-bg-color: #f0f0f0; /* Default to light gray for light theme */
         }
 
         /* Dark theme */
@@ -246,7 +267,6 @@
         .modal-content {
             background-color: var(--astro-main-bg-color);
             border-radius: 10px; /* This will give the modal curved edges */
-  
             margin: 15% auto;
             padding: 20px;
             border: 1px solid #00fff2;
@@ -2997,10 +3017,17 @@ for (var i = 0; i < closeButtons.length; i++) {
 
   const themeToggle = document.getElementById('status');
 
-  // Check if the user prefers a dark theme
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    themeToggle.checked = true;
-    document.documentElement.className = 'dark';
+  // Check if the user has a preferred theme
+  let userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  let userPrefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+  
+  // If the user prefers a dark theme
+  if (userPrefersDark) {
+    document.documentElement.className = 'dark-theme';
+  }
+  // If the user prefers a light theme or has no preference, default to light theme
+  else {
+    document.documentElement.className = 'light-theme';
   }
 
   themeToggle.addEventListener('change', function() {
